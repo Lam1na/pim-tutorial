@@ -1,0 +1,115 @@
+{% block footer %}
+<footer class="footer mt-auto py-5 text-light" style="background: var(--bs-dark);">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-md-4 mb-3">
+        <h5>{{ pimcore_input("footer_title", { placeholder: "Footer Überschrift", width: 300 }).render()|raw }}</h5>
+        <p>{{ pimcore_wysiwyg("footer_text", { height: 100, toolbar: "Basic" }).render()|raw }}</p>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <h5>Rechtliches</h5>
+        <ul class="list-unstyled">
+          <li>
+            {{ pimcore_link("impressum", {
+              text: "Impressum",
+              class: "text-light text-decoration-none"
+            }).render()|raw }}
+          </li>
+          <li>
+            {{ pimcore_link("datenschutz", {
+              text: "Datenschutz",
+              class: "text-light text-decoration-none"
+            }).render()|raw }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <h5>Folge uns</h5>
+        <ul class="list-inline">
+          {% if pimcore_link("facebook") %}
+          <li class="list-inline-item">
+            {{ pimcore_link("facebook", {
+              noText: true,
+              class: "text-light fs-4",
+              textPrefix: '<i class="bi bi-facebook"></i>',
+              target: "_blank"
+            }).render()|raw }}
+          </li>
+          {% endif %}
+          {% if pimcore_link("instagram") %}
+          <li class="list-inline-item">
+            {{ pimcore_link("instagram", {
+              noText: true,
+              class: "text-light fs-4",
+              textPrefix: '<i class="bi bi-instagram"></i>',
+              target: "_blank"
+            }).render()|raw }}
+          </li>
+          {% endif %}
+          {% if pimcore_link("twitter") %}
+          <li class="list-inline-item">
+            {{ pimcore_link("twitter", {
+              noText: true,
+              class: "text-light fs-4",
+              textPrefix: '<i class="bi bi-twitter-x"></i>',
+              target: "_blank"
+            }).render()|raw }}
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="text-center border-top pt-3 mt-3">
+    <small>© {{ "now"|date("Y") }} {{ document.getProperty('company_name') }}. Alle Rechte vorbehalten.</small>
+
+
+    </div>
+  </div>
+</footer>
+
+
+<style>
+
+.nl .btn {
+  transition: opacity 500ms ease-in-out;
+  min-width: 50px;
+}
+.nl .btn i {
+    transition: opacity 500ms ease-in-out;
+
+}
+i.hover, i.active, i.default {
+  position: absolute;
+  padding: 5px;
+}
+
+.nl .btn i.hover, .nl .btn i.active{
+ opacity:0;
+}
+
+.nl .btn:hover i.default{
+  opacity:0;
+}
+.nl .btn:hover i.hover {
+  opacity: 100;
+}
+
+.nl .btn:focus i.default{
+ opacity:0;
+}
+.nl .btn:focus i.hover{
+opacity:0;
+}
+.nl .btn:focus i.active {
+opacity:100;
+}
+
+
+</style>
+
+{% endblock %}

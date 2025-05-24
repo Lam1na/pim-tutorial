@@ -1,0 +1,13 @@
+{% if editmode %}
+{% include 'includes/bs-head.html.twig' %}
+{% endif %}
+
+{% include 'includes/footer.html.twig' %}
+{# Das Snippet aus dem Dokumentenbaum – z. B. für Logos, Links etc. #}
+{#{ pimcore_inc('/includes/footer') }#}
+
+
+
+{% if editmode %}
+{% include 'includes/bs-bottom.html.twig' %}
+{% endif %}

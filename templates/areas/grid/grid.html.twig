@@ -1,0 +1,69 @@
+{% if editmode %}
+    <div class="alert alert-info" role="alert"><i class="fa fa-pencil"></i>
+        Hintergrund-Farbe:&nbsp;{{ pimcore_checkbox('bgcolor', { "reload": true }) }}
+    </div>
+{% endif %}
+
+<div class="py-5" {% if not pimcore_checkbox('bgcolor').isChecked() %} style="background:#fff;" {% endif %}>
+    <div class="container">
+        <section class="area-grid container py-2">
+            <h1 class="py-2">{{ pimcore_input("headlinewysiwyg", {"placeholder": 'Überschrift einfügen'}) }}</h1>
+
+            {% if editmode %}
+                {{ pimcore_select("area_spalten", {
+                    "store": [
+                        ['1', 'einspaltig'],
+                        ['2', 'zweispaltig 50/50'],
+                        ['3', 'zweispaltig 66/33'],
+                        ['4', 'zweispaltig 33/66'],
+                        ['5', 'zweispaltig 75/25'],
+                        ['6', 'zweispaltig 25/75'],
+                        ['7', 'dreispaltig'],
+                        ['8', 'vierspaltig'],
+                        ['9', 'sechsspaltig']
+                    ],
+                    "reload": true,
+                    "defaultValue": "Spaltenzahl wählen"
+                }) }}
+            {% endif %}
+
+            {% set anzahl = pimcore_select("area_spalten").getData() %}
+            {% if anzahl is empty %}
+                {% set anzahl = 1 %}
+            {% endif %}
+
+            {# Mapping: Spalten-Keys und Bootstrap-Klassen für jede Anzahl #}
+            {% set spalten = {
+                1: ['eins'],
+                2: ['zwei-a', 'zwei-b'],
+                3: ['drei-a', 'drei-b'],
+                4: ['vier-a', 'vier-b'],
+                5: ['fuenf-a', 'fuenf-b'],
+                6: ['sechs-a', 'sechs-b'],
+                7: ['sieben-a', 'sieben-b', 'sieben-c'],
+                8: ['acht-a', 'acht-b', 'acht-c', 'acht-d'],
+                9: ['neun-a', 'neun-b', 'neun-c', 'neun-d', 'neun-e', 'neun-f']
+            } %}
+
+            {% set bootstrapCols = {
+                1: ['col-12'],
+                2: ['col-md-6', 'col-md-6'],
+                3: ['col-md-8', 'col-md-4'],
+                4: ['col-md-4', 'col-md-8'],
+                5: ['col-md-9', 'col-md-3'],
+                6: ['col-md-3', 'col-md-9'],
+                7: ['col-md-4', 'col-md-4', 'col-md-4'],
+                8: ['col-md-3', 'col-md-3', 'col-md-3', 'col-md-3'],
+                9: ['col-md-2', 'col-md-2', 'col-md-2', 'col-md-2', 'col-md-2', 'col-md-2']
+            } %}
+
+            <div class="row">
+                {% for i in 0..(spalten[anzahl]|length - 1) %}
+                    <div class="{{ bootstrapCols[anzahl][i] }}">
+                        {{ pimcore_areablock(spalten[anzahl][i]) }}
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</div>

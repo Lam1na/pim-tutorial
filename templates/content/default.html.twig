@@ -1,0 +1,47 @@
+{% extends 'includes/bs.html.twig' %}
+
+{% block content %}
+
+    <h1 class="mt-5">{{ pimcore_input('headline', {"width": 540}) }}</h1>
+
+    {% for i in pimcore_iterate_block(pimcore_block('contentblock')) %}
+        <p class="lead">{{ pimcore_input('subline') }}</p>
+        {{ pimcore_areablock("contentareablock") }}
+        <button type="button" class="btn btn-primary">Primary</button>
+    {% endfor %}
+
+    
+    
+    <style>
+      .content p {text-align: justify; text-justify: inter-word;}
+    </style>
+    
+    <div class="content mt-5">
+    
+      <h4>Deutsch</h4>
+      <p>
+          "Das höchste Gut und Übel" Cicero</br>
+          Absatz 1.10.32 - 1.10.33
+      </p>
+      <p><strong>Kap. I. <br>
+        § 1.</strong><br>
+      Ich wusste wohl, mein Brutus, dass, als ich das, was die geistreichsten und gelehrtesten Philosophen in griechischer Sprache behandelt hatten, in lateinischer wiedergab, meine Arbeit mancherlei Tadel finden würde. Denn manchen und nicht gerade ungelehrten Männern gefällt das Philosophiren überhaupt nicht; andere wollen eine mässige Thätigkeit hier wohl gestatten, aber meinen, dass man nicht so grossen Fleiss und so viele Mühe darauf verwenden dürfe. Auch giebt es Männer, die, mit den Schriften der Griechen vertraut, die lateinischen verachten und sagen, dass sie ihre Mühe lieber auf jene verwenden mögen. Endlich werden auch Einige mich vermuthlich an andere Wissenschaften verweisen, weil diese Art von Schriftstellerei, trotz des Scharfsinns, doch nach ihrer Meinung meiner Person und Würde nicht gezieme. </p>
+      <p><strong>§ 2.</strong><br>
+      Gegen alle Diese möchte ich hier Einiges sagen. Den Tadlern der Philosophie habe ich zwar schon hinlänglich in jener Schrift geantwortet, worin ich die von Hortensius angeklagte und getadelte Philosophie vertheidigt und gelobt habe, und da diese Schrift sowohl von Dir wie von Allen, denen ich ein Urtheil zutraue, gebilligt worden ist, so bin ich in diesen Arbeiten fortgefahren, damit es nicht scheine, als könnte ich das Interesse für diese Wissenschaft wohl erwecken, aber nicht dauernd erhalten. Wenn dagegen Manche, die dem wohl beistimmen, doch nur eine mässigere Thätigkeit hier gestatten wollen, so fordern sie eine Mässigung bei einem Gegenstande, wo sie schwer einzuhalten ist, und der, einmal aufgenommen, sich nicht in Schranken halten oder wieder bei Seite legen lässt. Vielmehr möchte ich dann eher Jenen beitreten, welche die Philosophie überhaupt nicht zulassen wollen, als Diesen, die eine Schranke für einen Gegenstand ziehen, der unerschöpflich ist und um so besser wird, je grösser er wird. </p>
+      <p><strong>§ 3.</strong><br>
+      Denn wenn man die Weisheit wirklich erreichen kann, so muss man sie nicht blos erwerben, sondern auch geniessen, und wenn ihre Erwerbung schwer fällt, so darf man doch der Erforschung der Wahrheit, bevor man sie erreicht hat, keine Schranke ziehen; auch bleibt die Ermüdung im Suchen da tadelnswerth, wo der gesuchte Gegenstand der schönste ist. Wenn ich aber an meiner Arbeit mich ergötze, so kann doch nur der Neid mich davon abziehen wollen, und wenn ich mich dabei anstrenge, so darf doch ein Dritter fremdem Fleisse keine Grenze ziehen wollen. Wie der gutmüthige Chremes bei Terenz nicht will, dass sein neuer Nachbar »grabe oder pflüge oder sonst so etwas thue« womit er ihn nicht von der Arbeit, sondern nur von der gemeinen Körperarbeit abhalten will, so machen sich Manche übertriebene Sorge, wenn sie an einer Arbeit Anstoss nehmen, welche mir keineswegs unangenehm ist. </p>
+      <p><strong>Kap. II. <br>
+        § 4.</strong><br>
+      Schwerer sind Die zufrieden zu stellen, welche die lateinischen Bücher verächtlich von sich weisen; nur wundert es mich bei diesen vor Allem, dass sie in den wichtigsten Dingen an ihrer Muttersprache keine Freude finden und doch die kleinen aus dem Griechischen wörtlich in das Lateinische übersetzten Geschichtchen nicht ungern lesen. Wer könnte wohl Allem, was den römischen Namen trägt, so feind sein, dass er des Ennius Medea und des Pacuvius Antiopa gering schätzte und zurückwiese, während er sich an denselben Stücken von Euripides geständlich ergötzt und nur die lateinischen Schriften hasst? Soll ich denn, höre ich ihn sagen, des Cäcilius Jugendgenossen und des Terenz Andria lesen und nicht lieber des Menander gleichnamige Stücke?</p>
+      <p><strong>§ 5.</strong><br>
+      Allein ich kann dem durchaus nicht beistimmen. Wenn auch Sophokles seine Electra noch so schön verfasst hat, so meine ich doch auch die schlechte Uebersetzung des Attilius lesen zu sollen, den Licinius »einen Schriftsteller von Eisen, aber doch immer einen Schriftsteller« nennt, der also gelesen werden soll. Mit unsern Dichtern ganz unbekannt zu sein, ist das Zeichen grosser Trägheit oder verzärtelter Vornehmthuerei, und ich kann Niemand für einen ganzen Gelehrten anerkennen, der unsre Schriften gar nicht kennt. Oder soll man zwar das lateinische Stück: »O! dass nicht im Haine....« lesen, obgleich es auch griechisch vorhanden ist, aber soll es nicht gestattet sein, des Plato Ausführungen über das gute und glückliche Leben lateinisch wiederzugeben? </p>
+      <p style=" text-align: justify; text-justify: inter-word;"><strong>§ 6.</strong><br>
+      Wenn ich nicht blos den Dolmetscher mache, sondern das von Andern Gesagte, so weit ich es billige, vertheidige, mein eigenes Urtheil und meine Darstellungsweise dazu gebe, weshalb sollen da solche Arbeiten von guter Schreibart, die keine blossen Uebersetzungen aus dem Griechischen sind, dennoch den griechischen Schriften nachstehn? Wendet man ein, dass die Griechen dies schon Alles behandelt hätten, so darf man dann auch nicht so viel griechische Bücher lesen, als doch geschehen muss. Denn was hätte wohl Chrysipp bei den Stoikern übergangen? Und trotzdem liest man den Diogenes, Antipater, Mnesarchus, Panätius und viele Andere, insbesondere unsern Freund Posidonius. Und ergötzt etwa Theophrast weniger, weil er das behandelt, was schon Aristoteles vor ihm behandelt hat? Stehen etwa die Epikureer davon ab, in ihren Schriften Gegenstände, über die sowohl Epikur wie die Alten geschrieben haben, nach ihrem Gutdünken zu behandeln? Und wenn die Griechen von den Griechen gelesen werden, sobald sie dieselben Gegenstände in anderer Weise behandeln, weshalb sollten da meine Schriften nicht von den Unsrigen gelesen werden? </p>
+      <p>Quelle: <a href="http://web.archive.org/web/20060222075851/http://www.klassikertexte.de/cicero.html">web.archive.org</a></p>
+    </div>
+    
+     {# wird über den Controller geladen #}
+    {#{ pimcore_inc('/includes/footer') }#}
+
+
+{% endblock %}
