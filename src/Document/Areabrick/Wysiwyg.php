@@ -4,21 +4,21 @@ namespace App\Document\Areabrick;
 
 use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
 
-class Grid extends AbstractTemplateAreabrick
+class Wysiwyg extends AbstractTemplateAreabrick
 {
     public function getName(): string
     {
-        return 'Spalten';
+        return 'Textfeld';
+    }
+    public function getIcon(): string
+    {
+        return '/bundles/pimcoreadmin/img/flat-color-icons/text.svg';
+    
     }
 
     public function getDescription(): string
     {
-        return 'Seiteninhalt durch Spalten organisieren';
-    }
-
-    public function getIcon(): string
-    {
-        return '/bundles/pimcoreadmin/img/flat-color-icons/add_column.svg';
+        return 'Textfeld mit Editor und Möglichkeit ein Bild hinzuzufügen';
     }
     
     public function needsReload(): bool

@@ -1,0 +1,66 @@
+{# templates/includes/timestamps.html.twig #}
+{% macro timestamps(created, updated) %}
+    <span class="text-muted small">
+        Erstellt am: {{ created ? created|date("d.m.y") : '–' }}<br>
+        Geändert am: {{ updated ? updated|date("d.m.y") : '–' }}
+    </span>
+{% endmacro %}
+
+
+{#% macro timestamps(name_prefix) %}
+    {% import _self as self %}
+
+    {% if editmode %}
+        { Hole ggf. bestehende Werte }
+        {% set createdAt = pimcore_input(name_prefix ~ '_created_at').getData() %}
+        {% set updatedAt = "now"|date("Y-m-d H:i:s") %}
+
+        { Verstecktes Input-Feld für "Erstellt am" – nur setzen, wenn noch leer }
+        {{ pimcore_input(name_prefix ~ '_created_at', {
+            'type': 'hidden',
+            'defaultValue': createdAt ?: updatedAt
+        }) }}
+
+        { Verstecktes Input-Feld für "Geändert am" – immer aktualisieren }
+        {{ pimcore_input(name_prefix ~ '_updated_at', {
+            'type': 'hidden',
+            'defaultValue': updatedAt
+        }) }}
+    {% else %}
+        { Ausgabe im Frontend }
+        {% set created = attribute(_context, name_prefix ~ '_created_at') %}
+        {% set updated = attribute(_context, name_prefix ~ '_updated_at') %}
+
+        <p class="text-muted small">
+            Erstellt am: {{ created ? created|date("d.m.Y H:i") : '–' }}<br>
+            Geändert am: {{ updated ? updated|date("d.m.Y H:i") : '–' }}
+        </p>
+    {% endif %}
+{% endmacro %#}
+
+
+
+
+{#% macro timestamps(name_prefix) %}
+    {% import _self as self %}
+
+    {% if editmode %}
+        {{ pimcore_input(name_prefix ~ '_created_at', {
+            'type': 'hidden',
+            'defaultValue': pimcore_input(name_prefix ~ '_created_at').getData() ?: "now"|date("Y-m-d H:i:s")
+        }) }}
+
+        {{ pimcore_input(name_prefix ~ '_updated_at', {
+            'type': 'hidden',
+            'defaultValue': pimcore_input(name_prefix ~ '_updated_at').getData() ?: "now"|date("Y-m-d H:i:s")
+        }) }}
+    {% else %}
+        {% set created = pimcore_input(name_prefix ~ '_created_at').getData() %}
+        {% set updated = pimcore_input(name_prefix ~ '_updated_at').getData() %}
+        <p class="text-muted small">
+            Erstellt am: {{ created ? created|date("d.m.Y H:i") : '–' }}<br>
+            Geändert am: {{ updated ? updated|date("d.m.Y H:i") : '–' }}
+        </p>
+    {% endif %}
+{% endmacro %#}
+

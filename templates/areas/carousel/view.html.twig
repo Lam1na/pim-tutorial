@@ -1,0 +1,107 @@
+{% set coltop %}
+    <div class="col alert alert-info mx-2"><i class="fa fa-pencil"></i>
+{% endset %}
+{% set colend %}
+    </div>
+{% endset %}
+
+{% if editmode %}    
+    <div class="container text-center">
+        <div class="row">
+            {{coltop}}
+                    Bild-Anzahl: 
+                    {{ pimcore_numeric('crs_amount',{
+                        "width" : 100,
+                        "minValue" : 1,
+                        "maxValue" : 12,
+                        "decimalPrecision" : 0,
+                        "class" : "float-end"
+                        }) 
+                    }}
+            {{colend}}
+            {{coltop}}
+                    Indikatoren:&nbsp;{{ pimcore_checkbox('crs_indicators', { "reload": true }) }}<br>
+            {{colend}}
+        </div>
+        <div class="row">
+            {{coltop}}
+                Bildtitel:&nbsp;{{ pimcore_checkbox('crs_captions', { "reload": true }) }}<br>
+            {{colend}}
+            {{coltop}}
+                Überbledung:&nbsp;{{ pimcore_checkbox('crs_crossfade', { "reload": true }) }}<br>
+            {{colend}}
+            {{coltop}}
+                Autoplay:&nbsp;{{ pimcore_select("crs_autoplay", {
+            "store": [
+                ["false", "statisch"],
+                ["carousel", "Autoplay"],
+                ["true", "nach Interaktion"]
+            ],
+            "defaultValue": "false"
+        }) }}
+            {{colend}}
+        </div>
+        <div class="row">
+            {{coltop}}
+                dunkle Schaltflächen:&nbsp;{{ pimcore_checkbox('crs_dark', { "reload": true }) }}<br>
+            {{colend}}
+            {% if pimcore_select("crs_autoplay").getData() != 'false' %}
+            {{coltop}}
+                Autoply delay (in ms):&nbsp;
+                {{ pimcore_numeric("crs_delay", {
+                    "width": 300,
+                    "minValue": 1000,
+                    "maxValue": 30000,
+                    "step": 500,
+                    "defaultValue": "5000",
+                    "class": "float-end"
+                    }) 
+                }}
+            {{colend}}
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
+
+{% set uid = 'carousel-' ~ random() %}
+{% set n = pimcore_numeric('crs_amount').getData() ?: 1 %}
+
+<h2>
+    {{ pimcore_input("headLine", {"width": 540}) }}
+</h2>
+
+
+<div id="{{ uid }}" class="carousel slide {% if pimcore_checkbox('crs_crossfade').isChecked() %} carousel-fade {% endif %} {% if pimcore_checkbox('crs_dark').isChecked() %} carousel-dark {% endif %}" data-bs-ride="{{ pimcore_select("crs_autoplay").getData() | trans  }}" data-bs-interval="{{ pimcore_numeric('crs_delay').getData() ?: 5000 }}">
+    {% if pimcore_checkbox('crs_indicators').isChecked() %}
+        <div class="carousel-indicators"> 
+            {% for i in 1..n %}
+                <button type="button" data-bs-target="#{{ uid }}" data-bs-slide-to="{{ i - 1 }}" aria-label="Slide{{ i }}" {% if i == 1 %}class="active" aria-current="true" {% endif %}></button>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="carousel-inner">
+        {% for i in 1..n %}
+            <div class="carousel-item {% if i == 1 %} active {% endif %}"> 
+            <img src="https://picsum.photos/1920/1080?random={{ i }}" 
+                srcset="https://picsum.photos/1920/1080?random={{ i }} 1x, https://picsum.photos/3840/2160?random={{ i }} 2x" 
+                class="d-block w-100" 
+                alt="Testbild{{ i }}">
+                {% if pimcore_checkbox('crs_captions').isChecked() %}
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2 style="color:white; text-shadow: 0px 0px 3px black, 1px 1px 8px black;">{{pimcore_input('crstitle'~ i, {"placeholder": 'Bildtitel '~ i})}}</h2>
+                        <p style="color:white; text-shadow: 0px 0px 3px black, 1px 1px 8px black; font-weight:500;">{{pimcore_input('crstext'~ i, {"placeholder": 'Text '~ i})}}</p>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#{{ uid }}" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#{{ uid }}" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>

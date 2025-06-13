@@ -1,0 +1,27 @@
+
+<div class="py-3 py-md-5">
+    <div class="container">
+        <section class="area-wysiwyg py-2">
+            <h2 class="py-2">
+                {% if editmode %}
+                    {{ pimcore_input("headlinewysiwyg", {"placeholder": "Überschrift einfügen"}) }}
+                {% else %}
+                    {{ document.getProperty("headlinewysiwyg")|default("Willkommen auf unserer Seite") }}
+                {% endif %}
+            </h2>
+{#
+            <h2 class="py-2 text-primary">
+                {% if editmode %}
+                    {{ pimcore_input("headlinewysiwyg", {"placeholder": "Überschrift einfügen"}) }}
+                {% else %}
+                    {{ pimcore_glossary('wysiwyg_headline')|default('Willkommen auf unserer Seite') }}
+                {% endif %}
+            </h2>
+#}
+            {{ pimcore_wysiwyg("contentwysiwyg", {
+                "height": 300,
+                "placeholder": "Hier Text oder Bild einfügen"
+            }) }}
+        </section>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+/* /src/scss/_typography.scss */
+
+body {
+  font-family: $font-body;
+  font-weight: $font-weight-light;
+  font-size: $font-size-base; // entspricht 16px
+   line-height: $line-height-base; // angenehm lesbar
+  letter-spacing: 0.015em; // leichtes Tracking für Offenheit
+  color: $text-color;
+  background-color: $color-white;
+}
+
+.wysiwyg-content {
+  font-family: $font-body;
+  font-weight: $font-weight-light;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 1.1rem;
+    line-height: 1.75;
+  }
+}
+
+h1 {
+  font-family: $font-headline;
+  font-style: oblique;
+  font-weight: 300;
+  color: $color-gold;
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: $font-subline;
+  font-weight: normal;
+  color: $color-gold;
+}

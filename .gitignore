@@ -47,3 +47,23 @@ nbproject
 
 # temp
 .temp
+
+# Node Modules
+node_modules/
+
+# Sass cache Dateien (optional)
+.sass-cache/
+
+# generierte CSS Dateien (die aus SCSS kompiliert werden)
+public/css/*.css
+
+# falls du Sourcemaps hast
+public/css/*.css.map
+
+# MacOS Systemdateien (optional)
+.DS_Store
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

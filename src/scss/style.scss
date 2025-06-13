@@ -1,0 +1,13 @@
+// src/scss/style.scss
+
+// Variablen und Schriftarten zuerst laden
+
+@import 'variables';
+@import 'typography';
+
+@import 'mixins';
+@import 'buttons';
+@import 'navigation';
+@import 'forms';
+@import 'layout';
+@import 'footer';

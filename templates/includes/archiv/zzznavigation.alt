@@ -1,0 +1,56 @@
+<!--
+    <nav class="navbar sticky-top navbar-expand-lg custom-navbar" aria-label="Hauptnavigation">
+        <div class="container-fluid">
+            {# Logo mit Link zur Startseite #}
+            <a class="navbar-brand" href="/">
+                <img src="/images/logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                &nbsp;&nbsp;Bootstrap
+            </a>
+            {# Hamburger-Button für mobile Ansicht #}
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Menü umschalten">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            {# Menücontainer, kollabiert mobil #}
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    {# Iteriere über alle Hauptmenü-Punkte #}
+                    {% for page in mainNavigation %}
+                        {% if page.isVisible() and menuRenderer.accept(page) %}
+                            {% set hasChildren = page.hasPages() %}
+                            <li class="nav-item{% if hasChildren %} dropdown{% endif %}">
+                                <a class="nav-link {% if hasChildren %}dropdown-toggle {% endif %}{% if page.isActive(true) %} active{% endif %}"
+                                   href="{{ page.getHref() }}"
+                                   {% if hasChildren %}
+                                       id="dropdown-{{ loop.index }}"
+                                       role="button"
+                                       data-bs-toggle="dropdown"
+                                       aria-haspopup="true"
+                                       aria-expanded="false"
+                                   {% endif %}
+                                   {% if page.isActive(true) %} aria-current="page"{% endif %}>
+                                    {{ page.getLabel() }}
+                                </a>
+                                {% if hasChildren %}
+                                    <ul class="dropdown-menu" aria-labelledby="dropdown-{{ loop.index }}">
+                                        {# Iteriere über Unterseiten #}
+                                        {% for child in page.getPages() %}
+                                            {% if child.isVisible() and menuRenderer.accept(child) %}
+                                                <li>
+                                                    <a class="dropdown-item{% if child.isActive(true) %} active{% endif %}" href="{{ child.getHref() }}"
+                                                       {% if child.isActive(true) %} aria-current="page"{% endif %}>
+                                                        {{ child.getLabel() }}
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+-->

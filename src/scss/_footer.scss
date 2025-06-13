@@ -1,0 +1,81 @@
+.site-footer {
+  background-color: $color-dark;
+  color: $color-gold;
+
+  h5 {
+    color: $color-gold;
+    font-weight: bold;
+    font-family: $font-secondary;
+  }
+
+  ul {
+    padding-left: 0;
+    list-style: none;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    a {
+      color: $color-gold;
+      text-decoration: none;
+
+      &:hover {
+        color: lighten($color-gold, 10%);
+      }
+    }
+  }
+
+  .border-top {
+    border-color: rgba($color-gold, 0.2);
+  }
+
+  small {
+    color: $color-gold;
+  }
+}
+
+
+nl {
+  .btn {
+    transition: opacity 500ms ease-in-out;
+    min-width: 50px;
+
+    i {
+      transition: opacity 500ms ease-in-out;
+    }
+
+    i.hover, i.active, i.default {
+      position: absolute;
+      padding: 5px;
+    }
+
+    i.hover, i.active {
+      opacity: 0;
+    }
+
+    &:hover {
+      i.default {
+        opacity: 0;
+      }
+
+      i.hover {
+        opacity: 1;
+      }
+    }
+
+    &:focus {
+      i.default {
+        opacity: 0;
+      }
+
+      i.hover {
+        opacity: 0;
+      }
+
+      i.active {
+        opacity: 1;
+      }
+    }
+  }
+}

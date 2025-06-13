@@ -10,10 +10,24 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ContentController extends FrontendController
 {
-    public function defaultAction(Request $request)
+    
+        public function defaultAction(Request $request)
     {
         return $this->render('content/default.html.twig');
     }
+    /*
+    public function defaultAction(Request $request)
+    {
+        $document = $request->attributes->get('document');
+        if (!$document) {
+            throw new \Exception('Kein Pimcore Dokument im Request vorhanden!');
+        }
+        
+        return $this->render('content/default.html.twig', [
+            'document' => $document,
+        ]);
+    }
+    */
 
     #[Route("/footer", name: "footer-action")]
 

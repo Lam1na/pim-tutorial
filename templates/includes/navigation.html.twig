@@ -1,75 +1,44 @@
-{% block navigation %}
-    {# Renderer für das Menü, filtert was ins Menü kommt #}
-    {% set menuRenderer = pimcore_nav_renderer('menu') %}
+{% block navigation %} {# Renderer für das Menü, filtert was ins Menü kommt #} {% set menuRenderer = pimcore_nav_renderer('menu') %} {# Wurzel-Dokument für Navigation ermitteln #} {% set navStartNode = document.getProperty('navigation_root') %} {% if not navStartNode is instanceof('\\Pimcore\\Model\\Document\\Page') %} {# Falls in Site-Kontext, Root der Site als Start #} {% if pimcore_site_is_request() %} {% set site = pimcore_site_current() %} {% set navStartNode = site.getRootDocument() %} {% else %} {# Sonst Dokument mit ID 1 als Start #} {% set navStartNode = pimcore_document(1) %} {% endif %} {% endif %} {# Navigation rekursiv mit aktiven Dokument markieren und Cache #} {% set mainNavigation = pimcore_build_nav({active: document, root: navStartNode, cache: true}) %}
 
-    {# Wurzel-Dokument für Navigation ermitteln #}
-    {% set navStartNode = document.getProperty('navigation_root') %}
-    {% if not navStartNode is instanceof('\\Pimcore\\Model\\Document\\Page') %}
-        {# Falls in Site-Kontext, Root der Site als Start #}
-        {% if pimcore_site_is_request() %}
-            {% set site = pimcore_site_current() %}
-            {% set navStartNode = site.getRootDocument() %}
-        {% else %}
-            {# Sonst Dokument mit ID 1 als Start #}
-            {% set navStartNode = pimcore_document(1) %}
-        {% endif %}
-    {% endif %}
 
-    {# Navigation rekursiv mit aktiven Dokument markieren und Cache #}
-    {% set mainNavigation = pimcore_build_nav({active: document, root: navStartNode, cache: true}) %}
+<nav class="navbar sticky-top navbar-expand-lg custom-navbar position-relative" aria-label="Hauptnavigation">
+    <div class="container-fluid position-relative">
 
-    <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background: var(--bs-primary);" aria-label="Hauptnavigation">
-        <div class="container-fluid">
-            {# Logo mit Link zur Startseite #}
-            <a class="navbar-brand" href="/">
-                <img src="/images/logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                &nbsp;&nbsp;Bootstrap
-            </a>
-            {# Hamburger-Button für mobile Ansicht #}
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Menü umschalten">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            {# Menücontainer, kollabiert mobil #}
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    {# Iteriere über alle Hauptmenü-Punkte #}
-                    {% for page in mainNavigation %}
-                        {% if page.isVisible() and menuRenderer.accept(page) %}
-                            {% set hasChildren = page.hasPages() %}
-                            <li class="nav-item{% if hasChildren %} dropdown{% endif %}">
-                                <a class="nav-link {% if hasChildren %}dropdown-toggle {% endif %}{% if page.isActive(true) %} active{% endif %}"
-                                   href="{{ page.getHref() }}"
-                                   {% if hasChildren %}
-                                       id="dropdown-{{ loop.index }}"
-                                       role="button"
-                                       data-bs-toggle="dropdown"
-                                       aria-haspopup="true"
-                                       aria-expanded="false"
-                                   {% endif %}
-                                   {% if page.isActive(true) %} aria-current="page"{% endif %}>
-                                    {{ page.getLabel() }}
-                                </a>
-                                {% if hasChildren %}
-                                    <ul class="dropdown-menu" aria-labelledby="dropdown-{{ loop.index }}">
-                                        {# Iteriere über Unterseiten #}
-                                        {% for child in page.getPages() %}
-                                            {% if child.isVisible() and menuRenderer.accept(child) %}
-                                                <li>
-                                                    <a class="dropdown-item{% if child.isActive(true) %} active{% endif %}" href="{{ child.getHref() }}"
-                                                       {% if child.isActive(true) %} aria-current="page"{% endif %}>
-                                                        {{ child.getLabel() }}
-                                                    </a>
-                                                </li>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </ul>
-                                {% endif %}
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            </div>
+        {# Links: Logo und Titel #}
+        <a class="navbar-brand position-absolute start-0" href="/">
+            <img src="/bundles/pimcoreadmin/img/flat-color-icons/music.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top me-2"> Bootstrap
+        </a>
+
+        {# Mobile Toggle #}
+        <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Menü umschalten">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        {# Zentriertes Menü #}
+        <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                {% for page in mainNavigation %} {% if page.isVisible() and menuRenderer.accept(page) %} {% set hasChildren = page.hasPages() %}
+                <li class="nav-item{% if hasChildren %} dropdown{% endif %}">
+                    <a class="nav-link {% if hasChildren %}dropdown-toggle {% endif %}{% if page.isActive(true) %} active{% endif %}" href="{{ page.getHref() }}" {% if hasChildren %} id="dropdown-{{ loop.index }}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" {% endif %} {% if page.isActive(true) %} aria-current="page" {% endif %}>
+                                {{ page.getLabel() }}
+                            </a> {% if hasChildren %}
+                    <ul class="dropdown-menu" aria-labelledby="dropdown-{{ loop.index }}">
+                        {% for child in page.getPages() %} {% if child.isVisible() and menuRenderer.accept(child) %}
+                        <li>
+                            <a class="dropdown-item{% if child.isActive(true) %} active{% endif %}" href="{{ child.getHref() }}" {% if child.isActive(true) %} aria-current="page" {% endif %}>
+                                                    {{ child.getLabel() }}
+                                                </a>
+                        </li>
+                        {% endif %} {% endfor %}
+                    </ul>
+                    {% endif %}
+                </li>
+                {% endif %} {% endfor %}
+            </ul>
         </div>
-    </nav>
+
+    </div>
+</nav>
+
+
 {% endblock %}

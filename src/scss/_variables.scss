@@ -1,0 +1,40 @@
+/* /src/scss/_variables.scss */
+
+// Farben
+
+//Farben Layout Hintergrund
+$bg-color-odd:  #ffffff; // weiß
+$bg-color-even: #F7F7F7; // hellgrau
+
+$color-font: #7E8082;
+$color-font-dark: #4b4e53;
+
+
+$color-gold: #cda45e;
+$color-gold-url: #cda45e;
+// $color-dark: #212529;
+$color-dark: #2c2b2b;
+$color-light: #dcdcdc;
+$color-white: #ffffff;
+
+
+// Schriften
+
+
+$font-primary: 'Lato', sans-serif;
+$font-secondary: 'Tenor Sans', sans-serif;
+$font-h1: 'Cormorant', serif;
+
+// Schriftarten
+$font-body: var(--font-body);
+$font-headline: var(--font-headline);
+$font-subline: var(--font-subline);
+
+$font-weight-light: 300;
+
+// Schriftgrößen
+$font-size-base: 1.1rem;
+$line-height-base: 1.6;
+
+// Farben
+$text-color: #7E8082;

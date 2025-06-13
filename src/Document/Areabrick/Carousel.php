@@ -4,21 +4,21 @@ namespace App\Document\Areabrick;
 
 use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
 
-class Grid extends AbstractTemplateAreabrick
+class Carousel extends AbstractTemplateAreabrick
 {
     public function getName(): string
     {
-        return 'Spalten';
+        return 'Carousel';
+    }
+    public function getIcon(): string
+    {
+        return '/bundles/pimcoreadmin/img/flat-color-icons/panorama.svg';
+    
     }
 
     public function getDescription(): string
     {
-        return 'Seiteninhalt durch Spalten organisieren';
-    }
-
-    public function getIcon(): string
-    {
-        return '/bundles/pimcoreadmin/img/flat-color-icons/add_column.svg';
+        return 'Bild Carousel einfügen';
     }
     
     public function needsReload(): bool

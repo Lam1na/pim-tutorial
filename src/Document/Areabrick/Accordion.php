@@ -4,21 +4,21 @@ namespace App\Document\Areabrick;
 
 use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
 
-class Grid extends AbstractTemplateAreabrick
+class Accordion extends AbstractTemplateAreabrick
 {
     public function getName(): string
     {
-        return 'Spalten';
+        return 'Accordion';
+    }
+    public function getIcon(): string
+    {
+        return '/bundles/pimcoreadmin/img/flat-color-icons/row.svg';
+    
     }
 
     public function getDescription(): string
     {
-        return 'Seiteninhalt durch Spalten organisieren';
-    }
-
-    public function getIcon(): string
-    {
-        return '/bundles/pimcoreadmin/img/flat-color-icons/add_column.svg';
+        return 'Accordion einfügen';
     }
     
     public function needsReload(): bool

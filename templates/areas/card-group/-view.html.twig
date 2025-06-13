@@ -1,0 +1,243 @@
+{% if editmode %}
+    {% set coltop %}
+        <div class="col alert alert-info mx-2"><i class="fa fa-pencil"></i>
+    {% endset %}
+    {% set colend %}
+        </div>
+    {% endset %}
+
+    <div class="container- text-center">
+        <div class="row">
+            {{coltop}}
+                    Container-Wrapper:&nbsp;{{ pimcore_checkbox('container_wrap', { "reload": true }) }}<br>
+            {{colend}}
+            {{coltop}}
+                    Card-Anzahl: 
+                    {{ pimcore_numeric('crd_amount',{
+                        "width" : 100,
+                        "minValue" : 0,
+                        "maxValue" : 10,
+                        "decimalPrecision" : 0,
+                        "defaultValue": "3",
+                        "class" : "float-end"
+                        }) 
+                    }}
+            {{colend}}
+            {{coltop}}
+                    Button:&nbsp;{{ pimcore_checkbox('crd_button', { "reload": true }) }}<br>
+            {{colend}}
+        </div>
+        <div class="row">
+            {{coltop}}
+                Card-Header:&nbsp;{{ pimcore_checkbox('crd_head', { "reload": true }) }}<br>
+            {{colend}}
+            {{coltop}}
+                Card-Image:&nbsp;{{ pimcore_checkbox('crd_img', { "reload": true }) }}<br>
+            {{colend}}
+            {{coltop}}
+                { pimcore_checkbox("card-modal-" ~ i, { "reload": true }) }}
+            {{colend}}
+        </div>
+        <div class="row">
+            {{coltop}}
+                Card-Footer:&nbsp;{{ pimcore_checkbox('crd_footer', { "reload": true }) }}<br>
+            {{colend}}
+            {{coltop}}
+                Card-XXX:&nbsp;{{ pimcore_checkbox('crd_a', { "reload": true }) }}<br>
+            {{colend}}
+            {{coltop}}
+                Card-YYY: 
+                    {{ pimcore_numeric('crd_b',{
+                        "width" : 100,
+                        "minValue" : 0,
+                        "maxValue" : 10,
+                        "decimalPrecision" : 0,
+                        "class" : "float-end"
+                        }) 
+                    }}
+            {{colend}}
+        </div>
+    </div>
+{% endif %}
+
+
+
+{% set n = pimcore_numeric('crd_amount').getData()?: 1  %}
+{% set clist = pimcore_numeric('crd_list').getData()?: 1  %}
+
+
+
+{% if pimcore_checkbox('container_wrap').isChecked() %}
+<div class="container">
+{% endif %}
+<h2>
+    {{ pimcore_input("headLine", {"width": 540}) }}
+</h2>
+{% if n == 1 %}
+    <div class="card" style="width: 30em;">
+        {% if pimcore_checkbox('crd_head').isChecked() %}
+            <h5 class="card-header">
+                {{ pimcore_input("card-header", {"width": 200}) }}
+            </h5>
+        {% endif %}
+        {% if pimcore_checkbox('crd_img').isChecked() %}
+            <img src="https://picsum.photos/200/100" class="card-img-top" alt="Lorem Picsum">
+        {% endif %}    
+        <div class="card-body">
+            <h5 class="card-title">{{ pimcore_input("card-title", {"width": 200}) }}</h5>
+            <p class="card-text">
+                {{ pimcore_wysiwyg("cardwysiwyg", {
+                    "height": 300,
+                    "placeholder": "Hier Text oder Bild einfügen"
+                }) }}
+            </p>
+            {% if clist > 1 %}
+                <ul class="list-group list-group-flush">
+                    {% for li in 1..clist %}
+                        <li class="list-group-item">{{ pimcore_input('card-list' ~ li, {"width": 200}) }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% if pimcore_checkbox('crd_button').isChecked() %}
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            {% endif %}
+        </div>
+        {% if pimcore_checkbox('crd_footer').isChecked() %}
+            <div class="card-footer">
+                Card footer
+            </div>
+        {% endif %}
+    </div>
+{% endif %}
+
+
+
+{% if n > 1 %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for i in 1..n %}
+        <div class="col">
+            <div class="card h-100">
+                {% if pimcore_checkbox('crd_head').isChecked() %}
+                    <h5 class="card-header">
+                        {{ pimcore_input("card-header-" ~ i, {"width": 200}) }}
+                    </h5>
+                {% endif %}
+                
+                {% if pimcore_checkbox('crd_img').isChecked() %}
+                    <img src="https://picsum.photos/300/150?random={{ i }}" class="card-img-top" alt="Lorem Picsum">
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{ pimcore_input("card-title-" ~ i, {"width": 200}) }}
+                    </h5>
+
+                    <p class="card-text">
+                        {{ pimcore_wysiwyg("cardwysiwyg-" ~ i, {
+                            "height": 200,
+                            "placeholder": "Hier Text oder Bild einfügen"
+                        }) }}
+                    </p>
+
+                    {% if clist > 0 %}
+                        <ul class="list-group list-group-flush mb-2">
+                            {% for li in 1..clist %}
+                                <li class="list-group-item">
+                                    {{ pimcore_input("card-" ~ i ~ "-list" ~ li, {"width": 200}) }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    {% if pimcore_checkbox('crd_button').isChecked() %}
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    {% endif %}
+                </div>
+
+                {% if pimcore_checkbox('crd_footer').isChecked() %}
+                    <div class="card-footer">
+                        Card footer
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endif %}
+
+{% if pimcore_checkbox('container_wrap').isChecked() %}
+</div>
+{% endif %}
+
+{#
+<div class="row g-4">
+    {% for i in 1..n %}
+        <div class="col-md-4">
+            <div class="card h-100">
+                <img src="https://picsum.photos/400/200?random={{ i }}" class="card-img-top" alt="Beispielbild {{ i }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ pimcore_input('card-title-' ~ i, { "width": 200 }) }}</h5>
+                    <p class="card-text">
+                        {{ pimcore_wysiwyg('card-text-' ~ i, { "height": 150 }) }}
+                    </p>
+                    
+                    {% if useButtons %}
+                        {% if pimcore_checkbox('card-modal-' ~ i).isChecked() %}
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cardModal{{ i }}">
+                                {{ pimcore_input('card-button-label-' ~ i).getData() ?: 'Mehr erfahren' }}
+                            </button>
+                        {% else %}
+                            <a href="{{ pimcore_input('card-link-' ~ i).getData() ?: '#' }}"
+                               class="btn btn-primary"
+                               target="{{ pimcore_checkbox('card-link-newtab-' ~ i).isChecked() ? '_blank' : '_self' }}">
+                                {{ pimcore_input('card-button-label-' ~ i).getData() ?: 'Zur Seite' }}
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                    {% if editmode %}
+                        <div class="alert alert-warning m-2">
+                            <strong>Karte {{ i }}</strong><br>
+                            {{ pimcore_checkbox('card-modal-' ~ i, { "reload": true }) }} Modal verwenden<br><br>
+                            
+                            {{ pimcore_input('card-button-label-' ~ i, { "width": 200, "placeholder": "Button-Text" }) }}<br>
+                            
+                            {% if pimcore_checkbox('card-modal-' ~ i).isChecked() %}
+                                {{ pimcore_input('modal-title-' ~ i, { "width": 300, "placeholder": "Modal-Titel" }) }}<br>
+                                {{ pimcore_wysiwyg('modal-body-' ~ i, { "height": 200 }) }}
+                            {% else %}
+                                {{ pimcore_input('card-link-' ~ i, { "width": 300, "placeholder": "https://..." }) }}
+                                {{ pimcore_checkbox('card-link-newtab-' ~ i) }} Neuer Tab
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+#}
+        {# Modal-HTML nur, wenn aktiviert #}
+{#
+        {% if useButtons and pimcore_checkbox('card-modal-' ~ i).isChecked() %}
+            <div class="modal fade" id="cardModal{{ i }}" tabindex="-1" aria-labelledby="cardModalLabel{{ i }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="cardModalLabel{{ i }}">
+                                {{ pimcore_input("modal-title-" ~ i).getData() ?: "Details" }}
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
+                        </div>
+                        <div class="modal-body">
+                            {{ pimcore_wysiwyg("modal-body-" ~ i) }}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    
+</div>
+#}

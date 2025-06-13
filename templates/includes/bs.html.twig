@@ -1,18 +1,16 @@
 {% include 'includes/bs-head.html.twig' %}
-   
-  {% include 'includes/navigation.html.twig' %}
-  
-    <main class="flex-shrink-0">
-      <div class="content">
-      
-        {#% apply pimcore_glossary %}
-          {{ block('content') }}
-        {% endapply %#}
-        {{ block('content') }}
-      
-      </div>
+
+<body class="flex-column d-flex h-100">
+
+    {% include 'includes/navigation.html.twig' %}
+
+    <main class="flex-grow-1">
+        <!-- flex-shrink-0 -->
+        <div class="content">
+
+            {#% apply pimcore_glossary %} {{ block('content') }} {% endapply %#} {{ block('content') }}
+
+        </div>
     </main>
 
-    {{ pimcore_inc("/includes/footer") }}
-    
-{% include 'includes/bs-bottom.html.twig' %}
+    {{ pimcore_inc("/includes/footer") }} {% include 'includes/bs-bottom.html.twig' %}

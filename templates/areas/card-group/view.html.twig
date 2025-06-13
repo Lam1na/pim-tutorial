@@ -1,0 +1,226 @@
+{% set coltop %}
+    <div class="col alert alert-info mx-2"><i class="fa fa-pencil"></i>
+{% endset %}
+{% set colend %}
+    </div>
+{% endset %}
+
+{% if editmode %}    
+    <div class="container text-center">
+        <div class="row">
+            {{coltop}}
+                    Container-Wrapper:&nbsp;{{ pimcore_checkbox('container_wrap', { "reload": true }) }}<br>
+            {{colend}}
+            {{coltop}}
+                    Card-Anzahl: 
+                    {{ pimcore_numeric('crd_amount',{
+                        "width" : 100,
+                        "minValue" : 1,
+                        "maxValue" : 12,
+                        "decimalPrecision" : 0,
+                        "class" : "float-end"
+                        }) 
+                    }}
+            {{colend}}
+            {{coltop}}
+                    Button:&nbsp;{{ pimcore_checkbox('crd_button', { "reload": true }) }}<br>
+            {{colend}}
+        </div>
+        <div class="row">
+            {{coltop}}
+                Card-Header:&nbsp;{{ pimcore_checkbox('crd_header', { "reload": true }) }}<br>
+            {{colend}}
+            {{coltop}}
+                Card-Image:&nbsp;{{ pimcore_checkbox('crd_img', { "reload": true }) }}<br>
+            {{colend}}
+            {{coltop}}
+                Card-Group:&nbsp;{{ pimcore_checkbox('crd_group', { "reload": true }) }}
+            {{colend}}
+        </div>
+        <div class="row">
+            {{coltop}}
+                Card-Footer:&nbsp;{{ pimcore_checkbox('crd_footer', { "reload": true }) }}<br>
+            {{colend}}
+            {{coltop}}
+                Card-Zitat:&nbsp;{{ pimcore_checkbox('crd_quote', { "reload": true }) }}<br>
+            {{colend}}
+            {{coltop}}
+                Card-YYY: 
+                    {{ pimcore_numeric('crd_b',{
+                        "width" : 100,
+                        "minValue" : 0,
+                        "maxValue" : 10,
+                        "decimalPrecision" : 0,
+                        "class" : "float-end"
+                        }) 
+                    }}
+            {{colend}}
+        </div>
+    </div>
+{% endif %}
+
+{% set n = pimcore_numeric('crd_amount').getData() ?: 1 %}
+{% set useButtons = pimcore_checkbox('crd_button').isChecked() %}
+{% set wrapContainer = pimcore_checkbox('container_wrap').isChecked() %}
+{% set useGroup = pimcore_checkbox('crd_group').isChecked() %}
+
+{% if wrapContainer %}
+<div class="container">
+{% endif %}
+
+<h2>
+    {{ pimcore_input("headLine", {"width": 540}) }}
+</h2>
+
+
+
+
+{% if useGroup %}
+<div class="card-group">
+{% else %}
+<div class="row g-4">
+{% endif %}
+    {% for i in 1..n %}
+        {% if not useGroup %}<div class="col-md-4">{% endif %}
+        <div class="card">
+            {% if pimcore_checkbox('crd_header').isChecked() %}
+            <h5 class="card-header">{{pimcore_input('cardheader'~ i, {"placeholder": 'Kopfzeile '~ i,  "width":"200px"})}}</h5>
+            {% endif %}
+            <img src="https://picsum.photos/400/200?random={{ i }}" {% if pimcore_checkbox('crd_header').isChecked() %}class="img"{% else %} class="card-img-top" {% endif %} alt="Beispielbild {{ i }}">
+            <div class="card-body">
+                <h5 class="card-title">{{pimcore_input('cardtitle'~ i, {"placeholder": 'Titel '~ i})}}</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">{{pimcore_input('cardsubtitle'~ i, {"placeholder": 'Untertitel '~ i})}}</h6>
+                <p class="card-text">{{ pimcore_wysiwyg('cardbody'~ i, {'height': 300})  }}</p>
+                
+                {% if pimcore_checkbox('crd_quote').isChecked() %}
+                    <figure>
+                        <blockquote class="blockquote">
+                            <p>{{pimcore_input('cardquote'~ i, {"placeholder": 'Zitat '~ i})}}</p>
+                        </blockquote>
+                        <figcaption class="blockquote-footer">
+                            Quelle: <cite title="Source Title">{{pimcore_input('quotesource'~ i, {"placeholder": 'Quelle '~ i})}}</cite>
+                        </figcaption>
+                    </figure>
+                {% endif %}
+                
+                {% if pimcore_checkbox('crd_button').isChecked() %}
+                    {% set v = pimcore_numeric('crd_btnvalue' ~ i).getData() ?: 1 %}
+
+                    {# Link Editable im Editmode anzeigen #}
+                    {% if editmode %}
+
+                        {{coltop}}
+                            Anzahl Schaltflächen: 
+                            {{ pimcore_numeric('crd_btnvalue' ~ i,{
+                                "width" : 100,
+                                "minValue" : 0,
+                                "maxValue" : 10,
+                                "decimalPrecision" : 0,
+                                "class" : "float-end"
+                                }) 
+                            }}
+                        {{colend}}
+                        
+                        {% for b in 1..v %}
+                            {{ pimcore_link('card_link_' ~ i ~ '_' ~ b, {
+                                title: 'Button Link ' ~ i ~ '_' ~ b,
+                                text: 'Mehr erfahren',
+                                parameters: { class: 'btn btn-primary mt-3' }
+                            }) }}
+                        {% endfor %}
+                    {% endif %}
+        
+                    {# Link im Live-Modus anzeigen, nur wenn vorhanden #}
+                    {% for b in 1..v %}
+                        {% set linkElement = pimcore_link('card_link_' ~ i ~ '_' ~ b) %}
+                        {% if linkElement and linkElement.href %}
+                            <a href="{{ linkElement.href }}"
+                            class="{{ linkElement.parameters.class|default('btn btn-primary mt-3 me-2') }}"
+                            {% if linkElement.target %}target="{{ linkElement.target }}"{% endif %}>
+                                {{ linkElement.text|default('Mehr erfahren') }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                
+                {% if editmode %}
+                    {{ coltop }}
+                    Card-Modalfenster:&nbsp;{{ pimcore_checkbox('crd_modal', { "reload": true }) }}<br>
+                    {{ colend }}
+                {% endif %}
+                {% if pimcore_checkbox('crd_modal').isChecked() %}
+                
+    {% if editmode %}
+                
+        <!-- Im Editmode: Modal offen zeigen -->
+        <div class="border p-3 mb-3 bg-light">
+            <h5 class="mb-3">Card-Einstellungen (Editmode sichtbar)</h5>
+            {{ pimcore_input('headline_' ~ i, {"width": 540}) }}
+
+            {% for p in pimcore_iterate_block(pimcore_block('modal_contentblock_' ~ i)) %}
+                <div class="my-3 border rounded p-3">
+                    <p class="lead">{{ pimcore_input('subline_' ~ i ~ '_' ~ loop.index) }}</p>
+                    {{ pimcore_areablock('modal_areablock_' ~ i ~ '_' ~ loop.index) }}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <!-- Im Live-Modus: Modal normal verwenden -->
+        <button type="button" class="btn btn-secondary mt-3" data-bs-toggle="modal" data-bs-target="#cardSettingsModal_{{ i }}">
+            mehr erfahren
+        </button>
+
+        <div class="modal fade" id="cardSettingsModal_{{ i }}" tabindex="-1" aria-labelledby="cardSettingsLabel_{{ i }}" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cardSettingsLabel_{{ i }}">Card Einstellungen {{ i }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h2>{{ pimcore_input('headline_' ~ i) }}</h2>
+
+                        {% for p in pimcore_iterate_block(pimcore_block('modal_contentblock_' ~ i)) %}
+                            <div class="my-3 border rounded p-3">
+                                <p class="lead">{{ pimcore_input('subline_' ~ i ~ '_' ~ loop.index) }}</p>
+                                {{ pimcore_areablock('modal_areablock_' ~ i ~ '_' ~ loop.index) }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endif %}
+
+
+                
+            </div>
+            {% if pimcore_checkbox('crd_footer').isChecked() %}
+                <div class="card-footer">
+                    {{pimcore_input('cardfooter'~ i, {"placeholder": 'Fußleiste '~ i,  "width":"200px"})}}
+                    <small class="text-muted">Erstellt am: 
+                        {{ pimcore_date('carddate'~ i, {
+                            "value": "now",
+                            "format": "d.m.Y",
+                            "outputIsoFormat": "DD.MM.YY"
+                            }) }} 
+                    </small>
+                </div>
+            {% endif %}
+        </div>
+        {% if not useGroup %}</div>{% endif %}
+    {% endfor %}
+</div>
+
+
+{% if wrapContainer %}
+</div>
+{% endif %}
+
+
+
+

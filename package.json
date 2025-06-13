@@ -1,0 +1,12 @@
+{
+  "name": "pim-tutorial",
+  "version": "1.0.0",
+"description": "Pimcore-Projekt mit SCSS im src Ordner",
+  "scripts": {
+    "build-css": "sass src/scss/style.scss public/css/style.css",
+    "watch-css": "sass --watch src/scss/style.scss public/css/style.css"
+  },
+  "devDependencies": {
+    "sass": "^1.75.0"
+  }
+}

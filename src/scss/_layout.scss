@@ -1,0 +1,41 @@
+body {
+  margin: 0 auto;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+
+.bg-odd {
+  background-color: $bg-color-odd;
+}
+
+.bg-even {
+  background-color: $bg-color-even;
+}
+
+
+footer {
+  background-color: $color-dark;
+  color: $color-light;
+  padding: 30px 0;
+  text-align: center;
+
+  a {
+    color: $color-gold;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-white;
+    }
+  }
+
+  .footer-logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: $color-gold;
+  }
+}
