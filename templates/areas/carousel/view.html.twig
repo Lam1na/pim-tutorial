@@ -1,55 +1,64 @@
 {% set coltop %}
-    <div class="col alert alert-info mx-2"><i class="fa fa-pencil"></i>
+    <div class="col alert alert-info mx-2 text-center"><i class="fa fa-pencil"></i>
 {% endset %}
 {% set colend %}
     </div>
 {% endset %}
 
 {% if editmode %}    
-    <div class="container text-center">
-        <div class="row">
-            {{coltop}}
-                    Bild-Anzahl: 
-                    {{ pimcore_numeric('crs_amount',{
+    <div class="container">
+        <div class="row text-center">
+            <div class="col alert alert-info mx-2 text-center">
+                <div class="row">
+                    <div class="col text-end">
+                       <i class="fa fa-pencil"></i>&nbsp;Bild-Anzahl:
+                    </div>
+                    <div class="col">
+                        {{ pimcore_numeric('crs_amount',{
                         "width" : 100,
                         "minValue" : 1,
                         "maxValue" : 12,
                         "decimalPrecision" : 0,
-                        "class" : "float-end"
+                        "class": "float-start"
                         }) 
                     }}
-            {{colend}}
-            {{coltop}}
-                    Indikatoren:&nbsp;{{ pimcore_checkbox('crs_indicators', { "reload": true }) }}<br>
+                    </div>
+                </div>  
             {{colend}}
         </div>
         <div class="row">
+            {{coltop}}
+                Indikatoren:&nbsp;{{ pimcore_checkbox('crs_indicators', { "reload": true }) }}<br>
+            {{colend}}
+            {{coltop}}
+                dunkle Schaltflächen:&nbsp;{{ pimcore_checkbox('crs_dark', { "reload": true }) }}<br>
+            {{colend}}
             {{coltop}}
                 Bildtitel:&nbsp;{{ pimcore_checkbox('crs_captions', { "reload": true }) }}<br>
             {{colend}}
             {{coltop}}
                 Überbledung:&nbsp;{{ pimcore_checkbox('crs_crossfade', { "reload": true }) }}<br>
             {{colend}}
-            {{coltop}}
-                Autoplay:&nbsp;{{ pimcore_select("crs_autoplay", {
-            "store": [
-                ["false", "statisch"],
-                ["carousel", "Autoplay"],
-                ["true", "nach Interaktion"]
-            ],
-            "defaultValue": "false"
-        }) }}
-            {{colend}}
+            
         </div>
         <div class="row">
             {{coltop}}
-                dunkle Schaltflächen:&nbsp;{{ pimcore_checkbox('crs_dark', { "reload": true }) }}<br>
+                Autoplay:&nbsp;
+                {{ pimcore_select("crs_autoplay", {
+                    "store": [
+                        ["false", "manuell"],
+                        ["carousel", "autoplay"],
+                        ["true", "nach Interaktion"]
+                    ],
+                    "defaultValue": "false"
+                    }) 
+                }}
             {{colend}}
             {% if pimcore_select("crs_autoplay").getData() != 'false' %}
             {{coltop}}
                 Autoply delay (in ms):&nbsp;
                 {{ pimcore_numeric("crs_delay", {
-                    "width": 300,
+                    "width": 100,
                     "minValue": 1000,
                     "maxValue": 30000,
                     "step": 500,
@@ -58,6 +67,37 @@
                     }) 
                 }}
             {{colend}}
+            {% endif %}
+        </div>
+        <div class="row">    
+            {{coltop}}
+                Parallax:&nbsp;{{ pimcore_checkbox('crs_parallax', { "reload": true }) }}<br>
+            {{colend}}
+            {% if pimcore_checkbox('crs_parallax').isChecked() %}
+                {{coltop}}
+                    v-Bild:&nbsp;
+                    {{ pimcore_numeric("crs_pl_imgspeed", {
+                        "width": 100,
+                        "minValue": -10,
+                        "maxValue": 10,
+                        "step": 1,
+                        "defaultValue": "1",
+                        "class": "float-end"
+                        }) 
+                    }}
+                {{colend}}
+                {{coltop}}
+                    v-Text:&nbsp;
+                    {{ pimcore_numeric("crs_pl_txtspeed", {
+                        "width": 100,
+                        "minValue": -10,
+                        "maxValue": 10,
+                        "step": 1,
+                        "defaultValue": "1",
+                        "class": "float-end"
+                        }) 
+                    }}
+                {{colend}}
             {% endif %}
         </div>
     </div>
@@ -71,7 +111,12 @@
 </h2>
 
 
-<div id="{{ uid }}" class="carousel slide {% if pimcore_checkbox('crs_crossfade').isChecked() %} carousel-fade {% endif %} {% if pimcore_checkbox('crs_dark').isChecked() %} carousel-dark {% endif %}" data-bs-ride="{{ pimcore_select("crs_autoplay").getData() | trans  }}" data-bs-interval="{{ pimcore_numeric('crs_delay').getData() ?: 5000 }}">
+<div id="{{ uid }}" class="carousel slide 
+    {% if pimcore_checkbox('crs_crossfade').isChecked() %} carousel-fade {% endif %} 
+    {% if pimcore_checkbox('crs_dark').isChecked() %} carousel-dark {% endif %}" 
+    data-bs-ride="{{ pimcore_select("crs_autoplay").getData() | trans  }}" 
+    data-bs-interval="{{ pimcore_numeric('crs_delay').getData() ?: 5000 }}">
+
     {% if pimcore_checkbox('crs_indicators').isChecked() %}
         <div class="carousel-indicators"> 
             {% for i in 1..n %}
@@ -84,10 +129,12 @@
             <div class="carousel-item {% if i == 1 %} active {% endif %}"> 
             <img src="https://picsum.photos/1920/1080?random={{ i }}" 
                 srcset="https://picsum.photos/1920/1080?random={{ i }} 1x, https://picsum.photos/3840/2160?random={{ i }} 2x" 
-                class="d-block w-100" 
+                class="d-block w-100 {% if pimcore_checkbox('crs_parallax').isChecked() %} gsap-parallax-img {% endif %}" 
+                {% if pimcore_checkbox('crs_parallax').isChecked() %} data-rellax-speed="{{ pimcore_numeric('crs_pl_imgspeed').getData() ?: -5 }}" {% endif %}
                 alt="Testbild{{ i }}">
                 {% if pimcore_checkbox('crs_captions').isChecked() %}
-                    <div class="carousel-caption d-none d-md-block">
+                    <div class="carousel-caption d-none d-md-block {% if pimcore_checkbox('crs_parallax').isChecked() %} gsap-parallax-txt {% endif %}" 
+                        {% if pimcore_checkbox('crs_parallax').isChecked() %}data-rellax-speed="{{ pimcore_numeric('crs_pl_txtspeed').getData() ?: 1 }}"{% endif %}>
                         <h2 style="color:white; text-shadow: 0px 0px 3px black, 1px 1px 8px black;">{{pimcore_input('crstitle'~ i, {"placeholder": 'Bildtitel '~ i})}}</h2>
                         <p style="color:white; text-shadow: 0px 0px 3px black, 1px 1px 8px black; font-weight:500;">{{pimcore_input('crstext'~ i, {"placeholder": 'Text '~ i})}}</p>
                     </div>

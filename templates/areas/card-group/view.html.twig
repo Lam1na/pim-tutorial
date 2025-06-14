@@ -82,7 +82,7 @@
 {% endif %}
     {% for i in 1..n %}
         {% if not useGroup %}<div class="col-md-4">{% endif %}
-        <div class="card">
+        <div class="card" data-aos="flip-left" data-aos-easing="ease-out-back" data-aos-duration="1000" data-aos-delay="0">
             {% if pimcore_checkbox('crd_header').isChecked() %}
             <h5 class="card-header">{{pimcore_input('cardheader'~ i, {"placeholder": 'Kopfzeile '~ i,  "width":"200px"})}}</h5>
             {% endif %}
@@ -169,7 +169,6 @@
         <button type="button" class="btn btn-secondary mt-3" data-bs-toggle="modal" data-bs-target="#cardSettingsModal_{{ i }}">
             mehr erfahren
         </button>
-
         <div class="modal fade" id="cardSettingsModal_{{ i }}" tabindex="-1" aria-labelledby="cardSettingsLabel_{{ i }}" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
