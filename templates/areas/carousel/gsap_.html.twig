@@ -127,18 +127,22 @@
     <div class="carousel-inner">
         {% for i in 1..n %}
             <div class="carousel-item {% if i == 1 %} active {% endif %}">
-                <img src="https://picsum.photos/1920/1080?random={{ i }}" 
-                    srcset="https://picsum.photos/1920/1080?random={{ i }} 1x, https://picsum.photos/3840/2160?random={{ i }} 2x" 
-                    class="d-block w-100 {% if pimcore_checkbox('crs_parallax').isChecked() %} rellax {% endif %}"
-                {% if pimcore_checkbox('crs_parallax').isChecked() %} data-rellax-speed="{{ pimcore_numeric('crs_pl_imgspeed').getData() ?: -5 }}" {% endif %}
-                alt="Testbild{{ i }}">
-                {% if pimcore_checkbox('crs_captions').isChecked() %}
-                    <div class="carousel-caption d-none d-md-block {% if pimcore_checkbox('crs_parallax').isChecked() %} rellax {% endif %}" 
-                        {% if pimcore_checkbox('crs_parallax').isChecked() %}data-rellax-speed="{{ pimcore_numeric('crs_pl_txtspeed').getData() ?: 1 }}"{% endif %}>
-                        <h2 style="color:white; text-shadow: 0px 0px 3px black, 1px 1px 8px black;">{{pimcore_input('crstitle'~ i, {"placeholder": 'Bildtitel '~ i})}}</h2>
-                        <p style="color:white; text-shadow: 0px 0px 3px black, 1px 1px 8px black; font-weight:500;">{{pimcore_input('crstext'~ i, {"placeholder": 'Text '~ i})}}</p>
-                    </div>
-                {% endif %}
+                <div class="parallax-wrapper" style="position: relative; overflow: hidden; height: 100vh !important;"> 
+                    <img src="https://picsum.photos/1920/1080?random={{ i }}" 
+                        srcset="https://picsum.photos/1920/1080?random={{ i }} 1x, https://picsum.photos/3840/2160?random={{ i }} 2x" 
+                        class="d-block w-100 {% if pimcore_checkbox('crs_parallax').isChecked() %} gsap-parallax-img {% endif %}"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100vh !important; object-fit: cover; z-index: 1;" 
+                    {% if pimcore_checkbox('crs_parallax').isChecked() %} data-gsap-speed="{{ pimcore_numeric('crs_pl_imgspeed').getData() ?: -5 }}" {% endif %}
+                    alt="Testbild{{ i }}">
+                    {% if pimcore_checkbox('crs_captions').isChecked() %}
+                        <div class="carousel-caption d-none d-md-block {% if pimcore_checkbox('crs_parallax').isChecked() %} gsap-parallax-txt {% endif %}" 
+                            {% if pimcore_checkbox('crs_parallax').isChecked() %}data-gsap-speed="{{ pimcore_numeric('crs_pl_txtspeed').getData() ?: 1 }}"{% endif %}
+                            style="position: relative; z-index: 2;">
+                            <h2 style="color:white; text-shadow: 0px 0px 3px black, 1px 1px 8px black;">{{pimcore_input('crstitle'~ i, {"placeholder": 'Bildtitel '~ i})}}</h2>
+                            <p style="color:white; text-shadow: 0px 0px 3px black, 1px 1px 8px black; font-weight:500;">{{pimcore_input('crstext'~ i, {"placeholder": 'Text '~ i})}}</p>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
         {% endfor %}
         

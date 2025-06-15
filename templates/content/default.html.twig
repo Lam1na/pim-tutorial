@@ -1,7 +1,9 @@
-{% extends 'includes/bs.html.twig' %} {% block content %}
-<h2 class="mt-5">{{ pimcore_input('headline', {"width": 540}) }}</h2> {% for i in pimcore_iterate_block(pimcore_block('contentblock')) %} {% set bgClass = (loop.index is odd) ? 'bg-odd' : 'bg-even' %}
-<div class="py-5 {{ bgClass }}">
-    <p class="lead">{{ pimcore_input('subline') }}</p>
-    {{ pimcore_areablock("contentareablock") }}
-</div>
-{% endfor %} {% endblock %}
+{% extends 'includes/bs.html.twig' %}
+{% block content %}
+	{% for i in pimcore_iterate_block(pimcore_block('contentblock')) %}
+		{% set bgClass = (loop.index is odd) ? 'bg-odd' : 'bg-even' %}
+		<div class="{{ bgClass }}">
+			{{ pimcore_areablock("contentareablock") }}
+		</div>
+	{% endfor %}
+{% endblock %}

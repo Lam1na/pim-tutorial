@@ -1,44 +1,126 @@
-{% block navigation %} {# Renderer für das Menü, filtert was ins Menü kommt #} {% set menuRenderer = pimcore_nav_renderer('menu') %} {# Wurzel-Dokument für Navigation ermitteln #} {% set navStartNode = document.getProperty('navigation_root') %} {% if not navStartNode is instanceof('\\Pimcore\\Model\\Document\\Page') %} {# Falls in Site-Kontext, Root der Site als Start #} {% if pimcore_site_is_request() %} {% set site = pimcore_site_current() %} {% set navStartNode = site.getRootDocument() %} {% else %} {# Sonst Dokument mit ID 1 als Start #} {% set navStartNode = pimcore_document(1) %} {% endif %} {% endif %} {# Navigation rekursiv mit aktiven Dokument markieren und Cache #} {% set mainNavigation = pimcore_build_nav({active: document, root: navStartNode, cache: true}) %}
+{% block navigation %}
+	{# Renderer für das Menü, filtert was ins Menü kommt #}
+	{% set menuRenderer = pimcore_nav_renderer('menu') %}
+	{# Wurzel-Dokument für Navigation ermitteln #}
+	{% set navStartNode = document.getProperty('navigation_root') %}
+	{% if not navStartNode is instanceof('\\Pimcore\\Model\\Document\\Page') %}
+		{# Falls in Site-Kontext, Root der Site als Start #}
+		{% if pimcore_site_is_request() %}
+			{% set site = pimcore_site_current() %}
+			{% set navStartNode = site.getRootDocument() %}
+		{% else %}
+			{# Sonst Dokument mit ID 1 als Start #}
+			{% set navStartNode = pimcore_document(1) %}
+		{% endif %}
+	{% endif %}
+	{# Navigation rekursiv mit aktiven Dokument markieren und Cache #}
+	{% set mainNavigation = pimcore_build_nav({active: document, root: navStartNode, cache: true}) %}
 
+	<nav class="navbar navbar-expand-lg custom-navbar" aria-label="Hauptnavigation" style="background-color: #2C2C2B;" data-bs-theme="dark">
+		<div
+			class="container-fluid px-5">
+			{# Mobile Toggle #}
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Menü umschalten">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-<nav class="navbar sticky-top navbar-expand-lg custom-navbar position-relative" aria-label="Hauptnavigation">
-    <div class="container-fluid position-relative">
+			{#Branding (Logo & ggf. Titel) links #}
+			<div class="collapse navbar-collapse d-lg-flex">
+				<ul class="navbar-nav d-lg-flex col-lg-3 justify-content-lg-start align-items-center">
+					<li>
+						<a class="navbar-brand" href="/">
+							<img src="/bundles/pimcoreadmin/img/flat-color-icons/music.svg" alt="Logo" width="30" height="24" class="me-2">
+							Bootstrap
+						</a>
+					</li>
+					<li>
+						<h1 class="nav-pagetitle d-none d-md-block mb-0" style="font-size: 1.25rem;">
+							{{ document.title|default('Startseite') }}
+						</h1>
+					</li>
+				</ul>
 
-        {# Links: Logo und Titel #}
-        <a class="navbar-brand position-absolute start-0" href="/">
-            <img src="/bundles/pimcoreadmin/img/flat-color-icons/music.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top me-2"> Bootstrap
-        </a>
-
-        {# Mobile Toggle #}
-        <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Menü umschalten">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        {# Zentriertes Menü #}
-        <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-            <ul class="navbar-nav">
-                {% for page in mainNavigation %} {% if page.isVisible() and menuRenderer.accept(page) %} {% set hasChildren = page.hasPages() %}
-                <li class="nav-item{% if hasChildren %} dropdown{% endif %}">
-                    <a class="nav-link {% if hasChildren %}dropdown-toggle {% endif %}{% if page.isActive(true) %} active{% endif %}" href="{{ page.getHref() }}" {% if hasChildren %} id="dropdown-{{ loop.index }}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" {% endif %} {% if page.isActive(true) %} aria-current="page" {% endif %}>
-                                {{ page.getLabel() }}
-                            </a> {% if hasChildren %}
-                    <ul class="dropdown-menu" aria-labelledby="dropdown-{{ loop.index }}">
-                        {% for child in page.getPages() %} {% if child.isVisible() and menuRenderer.accept(child) %}
-                        <li>
-                            <a class="dropdown-item{% if child.isActive(true) %} active{% endif %}" href="{{ child.getHref() }}" {% if child.isActive(true) %} aria-current="page" {% endif %}>
-                                                    {{ child.getLabel() }}
-                                                </a>
-                        </li>
-                        {% endif %} {% endfor %}
-                    </ul>
-                    {% endif %}
-                </li>
-                {% endif %} {% endfor %}
-            </ul>
-        </div>
-
-    </div>
-</nav>
-
-
+				<ul class="navbar-nav col-lg-6 justify-content-lg-center">
+					{% for page in mainNavigation %}
+						{% if page.isVisible() and menuRenderer.accept(page) %}
+							{% set hasChildren = page.hasPages() %}
+							<li class="nav-item{% if hasChildren %} dropdown{% endif %}">
+								<a class="nav-link {% if hasChildren %}dropdown-toggle {% endif %}{% if page.isActive(true) %} active{% endif %}" href="{{ page.getHref() }}" {% if hasChildren %} id="dropdown-{{ loop.index }}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" {% endif %} {% if page.isActive(true) %} aria-current="page" {% endif %}>
+									{{ page.getLabel() }}
+								</a>
+								{% if hasChildren %}
+									<ul class="dropdown-menu" aria-labelledby="dropdown-{{ loop.index }}">
+										{% for child in page.getPages() %}
+											{% if child.isVisible() and menuRenderer.accept(child) %}
+												<li>
+													<a class="dropdown-item{% if child.isActive(true) %} active{% endif %}" href="{{ child.getHref() }}" {% if child.isActive(true) %} aria-current="page" {% endif %}>
+														{{ child.getLabel() }}
+													</a>
+												</li>
+											{% endif %}
+										{% endfor %}
+									</ul>
+								{% endif %}
+							</li>
+						{% endif %}
+					{% endfor %}
+				</ul>
+				{# Bereich Rechts #}
+				<ul class="navbar-nav d-lg-flex col-lg-3 justify-content-lg-end align-items-center">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="fa-regular fa-sun"></i>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a class="dropdown-item" href="#">
+									<i class="fa-regular fa-sun"></i>&nbsp;&nbsp;Light</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">
+									<i class="fa-solid fa-moon"></i>&nbsp;&nbsp;Dark</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">
+									<i class="fa-solid fa-circle-half-stroke"></i>&nbsp;&nbsp;Auto</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<button class="btn btn-primary">
+							<i class="fa-solid fa-user-large"></i>
+						</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 {% endblock %}
+{#Quelle: https://getbootstrap.com/docs/5.3/examples/navbars/ #}
+<!--
+<nav class="navbar navbar-expand-lg bg-body-tertiary rounded" aria-label="Thirteenth navbar example"> 
+    <div class="container-fluid"> 
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation"> 
+            <span class="navbar-toggler-icon"></span> 
+        </button> 
+        <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11"> 
+            <a class="navbar-brand col-lg-3 me-0" href="#">Centered nav</a> 
+            <ul class="navbar-nav col-lg-6 justify-content-lg-center"> 
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a> </li>
+                <li class="nav-item"> <a class="nav-link" href="#">Link</a> </li> 
+                <li class="nav-item"> <a class="nav-link disabled" aria-disabled="true">Disabled</a> </li> 
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a> 
+                    <ul class="dropdown-menu"> 
+                        <li><a class="dropdown-item" href="#">Action</a></li> 
+                        <li><a class="dropdown-item" href="#">Another action</a></li> 
+                        <li><a class="dropdown-item" href="#">Something else here</a></li> 
+                    </ul> 
+                </li> 
+            </ul> 
+            <div class="d-lg-flex col-lg-3 justify-content-lg-end"> 
+                <button class="btn btn-primary">Button</button> 
+            </div> 
+        </div> 
+    </div> 
+</nav>
+-->

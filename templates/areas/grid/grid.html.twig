@@ -7,7 +7,7 @@
 <div class="py-5" {% if not pimcore_checkbox('bgcolor').isChecked() %} style="background:#fff;" {% endif %}>
     <div class="container">
         <section class="area-grid container py-2">
-            <h1 class="py-2">{{ pimcore_input("headlinewysiwyg", {"placeholder": 'Überschrift einfügen'}) }}</h1>
+            <h2 class="py-2">{{ pimcore_input("headlinewysiwyg", {"placeholder": 'Überschrift einfügen'}) }}</h2>
 
             {% if editmode %}
                 {{ pimcore_select("area_spalten", {

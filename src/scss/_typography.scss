@@ -24,15 +24,27 @@ body {
   }
 }
 
-h1 {
+h1, h2 {
   font-family: $font-headline;
   font-style: oblique;
   font-weight: 300;
   color: $color-gold;
 }
 
-h2, h3, h4, h5, h6 {
+h3, h4, h5, h6 {
   font-family: $font-subline;
   font-weight: normal;
   color: $color-gold;
+}
+
+.subline {
+  font-family: $font-subline;
+  font-weight: normal;
+  color: white;
+}
+
+.nav-pagetitle::before {
+    margin-right: 0.25 rem;
+    content: ".:";
+    font-family: $font-subline;
 }

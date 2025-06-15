@@ -4,11 +4,11 @@
 
     {% include 'includes/navigation.html.twig' %}
 
-    <main class="flex-grow-1">
-        <!-- flex-shrink-0 -->
+    <main class="flex-grow-1"><!-- flex-shrink-0 -->
         <div class="content">
 
-            {#% apply pimcore_glossary %} {{ block('content') }} {% endapply %#} {{ block('content') }}
+            {#% apply pimcore_glossary %} {{ block('content') }} {% endapply %#} 
+            {{ block('content') }}
 
         </div>
     </main>

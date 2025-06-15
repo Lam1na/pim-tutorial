@@ -6,22 +6,21 @@
       {# popper ist nicht zwingend notwendig für den Bootsrap core #}
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     -->
-    <!--
+  
     <script src="https://cdn.jsdelivr.net/npm/rellax@1.12.1/rellax.min.js"></script>
     <script>
       var rellax = new Rellax('.rellax', {
-        horizontal: true,  // wenn du Seitwärtsbewegung möchtest
+        horizontal: false,  // wenn du Seitwärtsbewegung möchtest
         vertical: true
       });
     </script>
-    -->
-    
+
     {# GSAP Quelle: https://gsap.com/
             Dokumentation: https://gsap.com/docs/v3/   https://gsap.com/cheatsheet/
     #}
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-    <script src="/js/gsap-custom.js"></script>
+    <script type="module" src="/js/gsap-custom.js"></script>
 
   </body>
 </html>    
