@@ -10,3 +10,25 @@ gsap.to(".gsap-parallax", {
         scrub: true,
     }
 });
+
+gsap.to(".hero-title", {
+  y: 400,
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top top",
+    end: "bottom top",
+    scrub: true,
+  }
+});
+
+gsap.to(".hero-subtitle", {
+  y: 200,
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top top",
+    end: "bottom top",
+    scrub: true,
+  }
+});

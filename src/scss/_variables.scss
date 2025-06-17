@@ -1,24 +1,23 @@
 /* /src/scss/_variables.scss */
 
-// Farben
+// ========== Farbpalette ==========
+
+$color-light-shades:    #F7F7F7;
+$color-light-accent:    #F5F0E7;
+$color-main-brand:      #CDA45D;
+$color-dark-accent:     #7E8082;
+$color-dark-shades:     #2C2C2B;
+$color-border:          #dcdcdc;
+$color-white:           #ffffff;
+
 
 //Farben Layout Hintergrund
-$bg-color-odd:  #ffffff; // weiß
-$bg-color-even: #F7F7F7; // hellgrau
-
-$color-font: #7E8082;
-$color-font-dark: #4b4e53;
+$bg-color-odd:  $color-white; // weiß
+$bg-color-even: $color-light-shades; // hellgrau
 
 
-$color-gold: #cda45e;
-$color-gold-url: #cda45e;
-// $color-dark: #212529;
-$color-dark: #2c2b2b;
-$color-light: #dcdcdc;
-$color-white: #ffffff;
 
-
-// Schriften
+// ========== Schriften ==========
 
 
 $font-primary: 'Lato', sans-serif;

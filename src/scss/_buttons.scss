@@ -1,6 +1,6 @@
 .button {
-  background-color: $color-gold;
-  color: $color-dark;
+  background-color: $color-main-brand;
+  color: $color-dark-shades;
   padding: 10px 20px;
   border: none;
   border-radius: 3px;
@@ -8,6 +8,6 @@
   @include transition(background-color);
 
   &:hover {
-    background-color: darken($color-gold, 10%);
+    background-color: darken($color-main-brand, 10%);
   }
 }

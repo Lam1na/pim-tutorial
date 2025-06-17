@@ -1,0 +1,33 @@
+// /src/scss/_themes.scss
+
+// ========== SCSS Map mit diesen Variablen ==========
+$themes: (
+  light: (
+    bg: $color-light-shades,
+    text: $color-dark-shades,
+    accent: $color-light-accent,
+    brand: $color-main-brand
+  ),
+  dark: (
+    bg: $color-dark-shades,
+    text: $color-light-shades,
+    accent: $color-dark-accent,
+    brand: $color-main-brand
+  )
+);
+
+// ========== Theme Styles ==========
+
+@each $theme, $colors in $themes {
+  [data-theme="#{$theme}"] {
+    .bg-odd {
+      background-color: map-get($colors, bg-odd);
+      color: map-get($colors, text-color);
+    }
+
+    .bg-even {
+      background-color: map-get($colors, bg-even);
+      color: map-get($colors, text-color);
+    }
+  }
+}

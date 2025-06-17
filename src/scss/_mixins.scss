@@ -1,3 +1,6 @@
+// /src/scss/_mixins.scss
+
+// ========== Ladeanimation ==========
 @mixin transition($properties...) {
   transition: $properties 0.3s ease-in-out;
 }

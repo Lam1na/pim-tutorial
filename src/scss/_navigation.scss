@@ -1,9 +1,9 @@
 .custom-navbar {
-  background-color: $color-dark;
+  background-color: $color-dark-shades;
   padding: 0.8rem;
 
   a {
-    color: $color-gold;
+    color: $color-main-brand;
     font-weight: 500;
     text-transform: uppercase;
     margin-right: 15px;
@@ -15,18 +15,22 @@
   }
 
   .navbar-brand {
-    color: $color-gold;
+    color: $color-main-brand;
     font-weight: bold;
     font-size: 1.5rem;
   }
 }
+a.navbar-brand {
+  font-family: Montserrat-Alt1, $font-subline, Arial, Helvetica, sans-serif;
+  font-weight: 300 !important;
+}
 
 .navbar-toggler {
-  border-color: $color-gold;
+  border-color: $color-main-brand;
 }
 
 .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23#{str-slice('#{$color-gold}', 2)}' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23#{str-slice('#{$color-main-brand}', 2)}' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
 .custom-navbar .navbar-brand {
@@ -45,14 +49,14 @@
 }
 
 nav .btn-primary{
-  background: $color-gold;
+  background: $color-main-brand;
   color: white;
-  border: 1px solid $color-gold;
+  border: 1px solid $color-main-brand;
   transition: background 0.8s ease-in, color 0.3s ease-out
 }
 
 nav .btn-primary:hover{
   background: white;
-  color: $color-gold;
-  border: 1px solid $color-gold;
+  color: $color-main-brand;
+  border: 1px solid $color-main-brand;
 }

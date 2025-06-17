@@ -30,7 +30,7 @@
 					<li>
 						<a class="navbar-brand" href="/">
 							<img src="/bundles/pimcoreadmin/img/flat-color-icons/music.svg" alt="Logo" width="30" height="24" class="me-2">
-							Bootstrap
+							{{ document.getProperty('company_name') ?: 'Firmenname' }}
 						</a>
 					</li>
 					<li>
@@ -73,15 +73,15 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li>
-								<a class="dropdown-item" href="#">
+								<a class="dropdown-item" href="#" data-theme="light">
 									<i class="fa-regular fa-sun"></i>&nbsp;&nbsp;Light</a>
 							</li>
 							<li>
-								<a class="dropdown-item" href="#">
+								<a class="dropdown-item" href="#" data-theme="dark">
 									<i class="fa-solid fa-moon"></i>&nbsp;&nbsp;Dark</a>
 							</li>
 							<li>
-								<a class="dropdown-item" href="#">
+								<a class="dropdown-item" href="#" data-theme="auto">
 									<i class="fa-solid fa-circle-half-stroke"></i>&nbsp;&nbsp;Auto</a>
 							</li>
 						</ul>

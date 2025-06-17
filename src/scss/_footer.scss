@@ -1,9 +1,9 @@
 .site-footer {
-  background-color: $color-dark;
-  color: $color-gold;
+  background-color: $color-dark-accent;
+  color: $color-main-brand;
 
   h5 {
-    color: $color-gold;
+    color: $color-main-brand;
     font-weight: bold;
     font-family: $font-secondary;
   }
@@ -17,21 +17,21 @@
     }
 
     a {
-      color: $color-gold;
+      color: $color-main-brand;
       text-decoration: none;
 
       &:hover {
-        color: lighten($color-gold, 10%);
+        color: lighten($color-main-brand, 10%);
       }
     }
   }
 
   .border-top {
-    border-color: rgba($color-gold, 0.2);
+    border-color: rgba($color-main-brand, 0.2);
   }
 
   small {
-    color: $color-gold;
+    color: $color-main-brand;
   }
 }
 
