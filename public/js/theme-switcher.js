@@ -1,5 +1,8 @@
 // theme-switcher.js
 
+const savedTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', savedTheme);
+
 function applyTheme(theme) {
   if (theme === 'auto') {
     document.documentElement.removeAttribute('data-theme');
@@ -11,7 +14,7 @@ function applyTheme(theme) {
 }
 
 // Event Listener
-document.querySelectorAll('.theme-switch').forEach(item => {
+document.querySelectorAll('[data-theme]').forEach(item => {
   item.addEventListener('click', e => {
     e.preventDefault();
     const theme = e.currentTarget.getAttribute('data-theme');

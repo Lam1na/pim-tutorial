@@ -1,10 +1,8 @@
 .site-footer {
-  background-color: $color-dark-accent;
-  color: $color-main-brand;
+  border-top: 1px solid rgba(205, 164, 93, 0.2);
 
   h5 {
-    color: $color-main-brand;
-    font-weight: bold;
+    color: #444444;
     font-family: $font-secondary;
   }
 
@@ -18,10 +16,13 @@
 
     a {
       color: $color-main-brand;
-      text-decoration: none;
+      text-decoration: underline;
+      transition: text-decoration 5s ease-in-out;
+      transition: 5s ease-in;
 
       &:hover {
         color: lighten($color-main-brand, 10%);
+        text-decoration: none;
       }
     }
   }
@@ -30,11 +31,13 @@
     border-color: rgba($color-main-brand, 0.2);
   }
 
-  small {
-    color: $color-main-brand;
-  }
 }
-
+.footer-copyright-brand {
+  color: $color-main-brand;
+  font-family: $font-brand;
+  font-weight: 300 !important;
+  text-transform: uppercase;
+}
 
 nl {
   .btn {

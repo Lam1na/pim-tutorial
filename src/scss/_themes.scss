@@ -3,16 +3,24 @@
 // ========== SCSS Map mit diesen Variablen ==========
 $themes: (
   light: (
+    bg-odd: $color-white,
+    bg-even: $color-light-shades,
     bg: $color-light-shades,
     text: $color-dark-shades,
     accent: $color-light-accent,
-    brand: $color-main-brand
+    brand: $color-main-brand,
+    bg-f: $color-bg-brighttheme,
+    text-f: $color-text-brighttheme,
   ),
   dark: (
+    bg-odd: #1e1e1e,
+    bg-even: $color-dark-shades,
     bg: $color-dark-shades,
     text: $color-light-shades,
     accent: $color-dark-accent,
-    brand: $color-main-brand
+    brand: $color-main-brand,
+    bg-f: $color-bg-darktheme,
+    text-f: $color-text-darktheme,
   )
 );
 
@@ -29,5 +37,22 @@ $themes: (
       background-color: map-get($colors, bg-even);
       color: map-get($colors, text-color);
     }
+    
+    .site-footer, .stylethemes {
+      background-color: map-get($colors, bg-f);
+      color: map-get($colors, text-f);
+    }
+
+    .site-footer a {
+      color: map-get($colors, brand);
+    }
+
+    .site-footer {
+        h1, h2, h3, h4, h5, h6 {
+            color: map-get($colors, text-f);  
+        }
+    }
+    
+
   }
 }

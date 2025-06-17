@@ -10,6 +10,11 @@ $color-dark-shades:     #2C2C2B;
 $color-border:          #dcdcdc;
 $color-white:           #ffffff;
 
+$color-bg-darktheme:     $color-dark-shades;
+$color-text-darktheme:   $color-dark-accent;
+$color-bg-brighttheme:   #f4f4f4;
+$color-text-brighttheme: $color-dark-shades;
+
 
 //Farben Layout Hintergrund
 $bg-color-odd:  $color-white; // weiß
@@ -28,6 +33,7 @@ $font-h1: 'Cormorant', serif;
 $font-body: var(--font-body);
 $font-headline: var(--font-headline);
 $font-subline: var(--font-subline);
+$font-brand: Montserrat-Alt1, var(--font-subline), Arial, Helvetica, sans-serif;
 
 $font-weight-light: 300;
 

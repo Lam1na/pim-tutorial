@@ -29,11 +29,13 @@
 | Commit erstellen              | ```bash cd /documents/pimcore/pim-tutorial && git commit -m "Deine Nachricht"``` | `git commit -m "Deine Nachricht"`      | Erstellt einen Commit mit Nachricht  |
 | Änderungen pushen             | ```bash cd /documents/pimcore/pim-tutorial && git push origin main``` | `git push origin main`                 | Push zum `main`-Branch                |
 | Push mit Force (vorsichtig!) | ```bash cd /documents/pimcore/pim-tutorial && git push --force origin main``` | `git push --force origin main`         | Erzwingt den Push (Überschreibt remote) |
-| Neuen Branch anlegen & wechseln | ```bash cd /documents/pimcore/pim-tutorial && git checkout -b Alpha_0.0.1``` | `git checkout -b Alpha_0.0.1`          | Erstellt und wechselt zu neuem Branch |
-| Zu Branch wechseln            | ```bash cd /documents/pimcore/pim-tutorial && git checkout Alpha_0.0.1``` | `git checkout Alpha_0.0.1`             | Wechselt zu existierendem Branch     |
-| Branch mergen (z. B. Alpha_0.0.1 in main) | ```bash cd /documents/pimcore/pim-tutorial && git checkout main && git merge Alpha_0.0.1``` | `git checkout main && git merge Alpha_0.0.1` | Merge Branch in main                  |
+| Neuen Branch anlegen & wechseln | ```bash cd /documents/pimcore/pim-tutorial && git checkout -b Alpha-0.0.1``` | `git checkout -b Alpha-0.0.1`          | Erstellt und wechselt zu neuem Branch |
+| Zu Branch wechseln            | ```bash cd /documents/pimcore/pim-tutorial && git checkout Alpha-0.0.1``` | `git checkout Alpha-0.0.1`             | Wechselt zu existierendem Branch     |
+| In den Branch pushen            | ```bash cd /documents/pimcore/pim-tutorial && git push origin Alpha-0.0.1``` | `git push origin Alpha-0.0.1`             | Push in den Branch Alpha-0.0.1     |
+| Branch mergen (z. B. Alpha-0.0.1 in main) | ```bash cd /documents/pimcore/pim-tutorial && git checkout main && git merge Alpha-0.0.1``` | `git checkout main && git merge Alpha-0.0.1` | Merge Branch in main                  |
 | Gemergten Branch pushen       | ```bash cd /documents/pimcore/pim-tutorial && git push origin main``` | `git push origin main`                  | Push nach Merge                      |
 | Lokale Branches anzeigen      | ```bash cd /documents/pimcore/pim-tutorial && git branch``` | `git branch`                           | Listet alle lokalen Branches         |
+| ALLE Branches anzeigen      | ```bash cd /documents/pimcore/pim-tutorial && git branch -a``` | `git branch -a`                           | Listet alle lokalen Branches         |
 
 ---
 

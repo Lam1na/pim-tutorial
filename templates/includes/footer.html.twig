@@ -1,47 +1,60 @@
 {% block footer %}
-<footer class="site-footer footer mt-auto py-5 text-light">
-    <div class="container">
-        <div class="row">
+	<footer class="site-footer footer mt-auto py-5">
+		<div class="container">
+			<div class="row">
 
-            <div class="col-md-4 mb-3">
-                <h5>{{ pimcore_input("footer_title", { placeholder: "Footer Überschrift", width: 300 }).render()|raw }}</h5>
-                <p>{{ pimcore_wysiwyg("footer_text", { height: 100, toolbar: "Basic" }).render()|raw }}</p>
-            </div>
+				<div class="col-md-4 mb-3">
+					<h5>{{ pimcore_input("footer_title", { placeholder: "Footer Überschrift", width: 300 }).render()|raw }}</h5>
+					<figure>
+						<blockquote class="blockquote">
+							<p>"Die Musik ist nicht aus, wenn sie zu Ende ist. Sie spielt immer weiter und weiter. Im Kopf, im Herzen, in den Träumen. Musik verklingt niemals."</p>
+						</blockquote>
+						<figcaption class="blockquote-footer">
+							Markus Keimel
+							<cite title="Source Title">österr. Musiker, Autor, Journalist</cite>
+						</figcaption>
+					</figure>
+				</div>
 
-            <div class="col-md-4 mb-3">
-                <h5>Rechtliches</h5>
-                <ul class="list-unstyled">
-                    <li>
-                        {{ pimcore_link("impressum", { text: "Impressum", class: "text-light text-decoration-none" }).render()|raw }}
-                    </li>
-                    <li>
-                        {{ pimcore_link("datenschutz", { text: "Datenschutz", class: "text-light text-decoration-none" }).render()|raw }}
-                    </li>
-                </ul>
-            </div>
+				<div class="col-md-4 mb-3">
+					<h5>Rechtliches</h5>
+					<ul class="list-unstyled">
+						<li>
+							{{ pimcore_link("impressum", { text: "Impressum" }).render()|raw }}
+						</li>
+						<li>
+							{{ pimcore_link("datenschutz", { text: "Datenschutz", }).render()|raw }}
+						</li>
+					</ul>
+				</div>
 
-            <div class="col-md-4 mb-3">
-                <h5>Folge uns</h5>
-                <ul class="list-inline">
-                    {% if pimcore_link("facebook") %}
-                    <li class="list-inline-item">
-                        {{ pimcore_link("facebook", { noText: true, class: "text-light fs-4", textPrefix: '<i class="bi bi-facebook"></i>', target: "_blank" }).render()|raw }}
-                    </li>
-                    {% endif %} {% if pimcore_link("instagram") %}
-                    <li class="list-inline-item">
-                        {{ pimcore_link("instagram", { noText: true, class: "text-light fs-4", textPrefix: '<i class="bi bi-instagram"></i>', target: "_blank" }).render()|raw }}
-                    </li>
-                    {% endif %} {% if pimcore_link("twitter") %}
-                    <li class="list-inline-item">
-                        {{ pimcore_link("twitter", { noText: true, class: "text-light fs-4", textPrefix: '<i class="bi bi-twitter-x"></i>', target: "_blank" }).render()|raw }}
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-        <div class="text-center border-top pt-3 mt-3">
-            <small>© {{ "now"|date("Y") }} {{ document.getProperty('company_name') ?: 'Firmenname' }}. Alle Rechte vorbehalten.</small>
-        </div>
-    </div>
-</footer>
+				<div class="col-md-4 mb-3">
+					<h5>Folge uns</h5>
+					<ul class="list-inline">
+						{% if pimcore_link("facebook") %}
+							<li class="list-inline-item">
+								{{ pimcore_link("facebook", { noText: true, class: "text-light fs-4", textPrefix: '<i class="bi bi-facebook"></i>', target: "_blank" }).render()|raw }}
+							</li>
+						{% endif %}
+						{% if pimcore_link("instagram") %}
+							<li class="list-inline-item">
+								{{ pimcore_link("instagram", { noText: true, class: "text-light fs-4", textPrefix: '<i class="bi bi-instagram"></i>', target: "_blank" }).render()|raw }}
+							</li>
+						{% endif %}
+						{% if pimcore_link("twitter") %}
+							<li class="list-inline-item">
+								{{ pimcore_link("twitter", { noText: true, class: "text-light fs-4", textPrefix: '<i class="bi bi-twitter-x"></i>', target: "_blank" }).render()|raw }}
+							</li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+			<div class="text-center border-top pt-3 mt-3">
+				<small>©
+					{{ "now"|date("Y") }}
+					<span class="footer-copyright-brand">{{ document.getProperty('company_name') ?: 'Firmenname' }}</span>
+					- Alle Rechte vorbehalten.</small>
+			</div>
+		</div>
+	</footer>
 {% endblock %}
