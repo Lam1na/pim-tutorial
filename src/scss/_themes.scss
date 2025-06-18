@@ -1,58 +1,105 @@
-// /src/scss/_themes.scss
+/* /src/scss/_themes.scss */
 
-// ========== SCSS Map mit diesen Variablen ==========
+@import 'variables';
+
+// Theme Farben als CSS-Variablen, Werte aus $css-vars Map
+
 $themes: (
   light: (
-    bg-odd: $color-white,
-    bg-even: $color-light-shades,
-    bg: $color-light-shades,
-    text: $color-dark-shades,
-    accent: $color-light-accent,
-    brand: $color-main-brand,
-    bg-f: $color-bg-brighttheme,
-    text-f: $color-text-brighttheme,
+    'bg-odd':   map-get($css-vars, 'color-bg-odd-light'),
+    'bg-even':  map-get($css-vars, 'color-bg-even-light'),
+    'bg':       map-get($css-vars, 'color-bg-lighttheme'),
+    'text':     map-get($css-vars, 'color-text-lighttheme'),
+    'accent':   map-get($css-vars, 'color-light-accent'),
+    'brand':    map-get($css-vars, 'color-main-brand'),
+    'border':   map-get($css-vars, 'color-border'),
   ),
   dark: (
-    bg-odd: #1e1e1e,
-    bg-even: $color-dark-shades,
-    bg: $color-dark-shades,
-    text: $color-light-shades,
-    accent: $color-dark-accent,
-    brand: $color-main-brand,
-    bg-f: $color-bg-darktheme,
-    text-f: $color-text-darktheme,
+    'bg-odd':   map-get($css-vars, 'color-bg-odd-dark'),
+    'bg-even':  map-get($css-vars, 'color-bg-even-dark'),
+    'bg':       map-get($css-vars, 'color-bg-darktheme'),
+    'text':     map-get($css-vars, 'color-text-darktheme'),
+    'accent':   map-get($css-vars, 'color-dark-accent'),
+    'brand':    map-get($css-vars, 'color-main-brand'),
+    'border':   map-get($css-vars, 'color-border'),
   )
 );
 
-// ========== Theme Styles ==========
+// Default-Werte für :root (Light-Theme)
 
-@each $theme, $colors in $themes {
-  [data-theme="#{$theme}"] {
-    .bg-odd {
-      background-color: map-get($colors, bg-odd);
-      color: map-get($colors, text-color);
-    }
-
-    .bg-even {
-      background-color: map-get($colors, bg-even);
-      color: map-get($colors, text-color);
-    }
-    
-    .site-footer, .stylethemes {
-      background-color: map-get($colors, bg-f);
-      color: map-get($colors, text-f);
-    }
-
-    .site-footer a {
-      color: map-get($colors, brand);
-    }
-
-    .site-footer {
-        h1, h2, h3, h4, h5, h6 {
-            color: map-get($colors, text-f);  
-        }
-    }
-    
-
+:root {
+  @each $var-name, $value in map-get($themes, light) {
+    --#{$var-name}: #{$value};
   }
+}
+
+// CSS Variablen für die Themes ausgeben
+
+@each $theme-name, $theme-values in $themes {
+  [data-theme="#{$theme-name}"] {
+    @each $var-name, $value in $theme-values {
+      --#{$var-name}: #{$value};
+    }
+  }
+}
+
+
+// Auto-Theme via prefers-color-scheme (dark und light)
+
+@media (prefers-color-scheme: dark) {
+  [data-theme="auto"] {
+    @each $var-name, $value in map-get($themes, dark) {
+      --#{$var-name}: #{$value};
+    }
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  [data-theme="auto"] {
+    @each $var-name, $value in map-get($themes, light) {
+      --#{$var-name}: #{$value};
+    }
+  }
+}
+
+// Beispiel-Klassen mit den Variablen nutzen
+
+.bg-odd {
+  background-color: var(--bg-odd);
+  color: var(--text);
+}
+
+.bg-even {
+  background-color: var(--bg-even);
+  color: var(--text);
+}
+
+.site-footer, .stylethemes {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+.site-footer a {
+  color: var(--brand);
+}
+
+.border {
+  border-color: var(--border);
+}
+* {
+  transition: background-color 2s ease, color 2s ease, border-color 2s ease;
+}
+
+#theme-curtain {
+  position: fixed;
+  inset: 0;
+  background-color: var(--color-bg-odd-dark);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--curtain-transition-duration) ease;
+  z-index: 9999;
+}
+
+#theme-curtain.active {
+  opacity: 1;
 }

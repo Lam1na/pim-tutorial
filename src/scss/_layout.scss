@@ -1,37 +1,4 @@
-/*
-:root {
-  --bg-color-odd: #ffffff;
-  --bg-color-even: #f7f7f7;
-  --text-color: #2c2c2b;
-}
-
-[data-theme="dark"] {
-  --bg-color-odd: #1e1e1e;
-  --bg-color-even: #2c2c2b;
-  --text-color: #f7f7f7;
-}
-
-// Auto (optional: basiert auf OS-Preference)
-@media (prefers-color-scheme: dark) {
-  [data-theme="auto"], :root:not([data-theme]) {
-    --bg-color: #2c2c2b;
-    --text-color: #f7f7f7;
-  }
-}
-
-.bg-odd {
-  background-color: var(--bg-color-odd);
-  color: var(--text-color);
-}
-
-.bg-even {
- background-color: var(--bg-color-even);
-  color: var(--text-color);
-}
-*/
-
-
-
+/* /src/scss/_layout.scss */
 
 body {
   margin: 0 auto;
@@ -43,28 +10,24 @@ body {
   padding: 0 15px;
 }
 
-
-
-
-
 footer {
-  background-color: $color-dark-shades;
-  color: $color-light-accent;
+  background-color: var(--color-dark-shades);
+  color: var(--color-light-accent);
   padding: 30px 0;
   text-align: center;
 
   a {
-    color: $color-main-brand;
+    color: var(--color-main-brand);
     text-decoration: none;
 
     &:hover {
-      color: $color-white;
+      color: var(--color-bg-odd-light); // entspricht deinem Weiß
     }
   }
 
   .footer-logo {
     font-size: 1.8rem;
     font-weight: bold;
-    color: $color-main-brand;
+    color: var(--color-main-brand);
   }
 }

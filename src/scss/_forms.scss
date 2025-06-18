@@ -1,11 +1,14 @@
+/* /src/scss/_forms.scss */
+
 input, textarea, select {
-  border: 1px solid $color-dark-shades;
+  border: 1px solid var(--color-dark-shades);
   padding: 8px;
   border-radius: 3px;
-  font-family: $font-primary;
+  font-family: var(--font-body);
 }
 
 input:focus, textarea:focus, select:focus {
-  border-color: $color-main-brand;
+  border-color: var(--color-main-brand);
   outline: none;
+  box-shadow: 0 0 5px var(--color-main-brand);
 }

@@ -1,6 +1,8 @@
+/* /src/scss/_button.scss */
+
 .button {
-  background-color: $color-main-brand;
-  color: $color-dark-shades;
+  background-color: var(--color-main-brand);
+  color: var(--color-light-shades);
   padding: 10px 20px;
   border: none;
   border-radius: 3px;

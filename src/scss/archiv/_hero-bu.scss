@@ -25,7 +25,7 @@
     position: relative;
     top: 60%;
     z-index: 1;
-    color: var(--color-light-accent); // statt weiß, damit du den hellen Farbton aus der Variable nutzt
+    color: var(--bg-color-odd); // statt weiß, damit du den hellen Farbton aus der Variable nutzt
     text-shadow: 0 0 2px var(--color-dark-shades), 3px 3px 8px var(--color-dark-shades);
 
     h1 {

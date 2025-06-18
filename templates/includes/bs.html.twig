@@ -1,6 +1,7 @@
 {% include 'includes/bs-head.html.twig' %}
 
 <body class="flex-column d-flex h-100">
+    <div id="theme-curtain"></div> {# Styleswitcher Animation #}
     <div id="loader" class="loader-overlay">
         <div class="spinner"></div>
     </div>
@@ -16,4 +17,8 @@
         </div>
     </main>
 
-    {{ pimcore_inc("/includes/footer") }} {% include 'includes/bs-bottom.html.twig' %}
+{% block footer %}
+    {{ pimcore_inc("/includes/footer") }}
+{% endblock %}
+
+{% include 'includes/bs-bottom.html.twig' %}

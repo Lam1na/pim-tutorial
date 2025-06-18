@@ -1,0 +1,116 @@
+// /src/scss/arciv/_themes-bu.scss
+
+/*
+// ========== SCSS Map mit diesen Variablen ==========
+$themes: (
+  light: (
+    bg-odd: $color-white,
+    bg-even: $color-light-shades,
+    bg: $color-light-shades,
+    text: $color-dark-shades,
+    accent: $color-light-accent,
+    brand: $color-main-brand,
+    bg-f: $color-bg-brighttheme,
+    text-f: $color-text-brighttheme,
+  ),
+  dark: (
+    bg-odd: #1e1e1e,
+    bg-even: $color-dark-shades,
+    bg: $color-dark-shades,
+    text: $color-light-shades,
+    accent: $color-dark-accent,
+    brand: $color-main-brand,
+    bg-f: $color-bg-darktheme,
+    text-f: $color-text-darktheme,
+  )
+);
+
+// ========== Theme Styles ==========
+
+@each $theme, $colors in $themes {
+  [data-theme="#{$theme}"] {
+    .bg-odd {
+      background-color: map-get($colors, bg-odd);
+      color: map-get($colors, text-f);
+    }
+
+    .bg-even {
+      background-color: map-get($colors, bg-even);
+      color: map-get($colors, text-f);
+    }
+    
+    .site-footer, .stylethemes {
+      background-color: map-get($colors, bg-f);
+      color: map-get($colors, text-f);
+    }
+
+    .site-footer a {
+      color: map-get($colors, brand);
+    }
+
+    .site-footer {
+        h1, h2, h3, h4, h5, h6 {
+            color: map-get($colors, text-f);  
+        }
+    }
+    
+
+  }
+}
+
+
+@media (prefers-color-scheme: dark) {
+  .bg-odd {
+    background-color: map-get(map-get($themes, dark), bg-odd);
+    color: map-get(map-get($themes, dark), text-f);
+  }
+
+  .bg-even {
+    background-color: map-get(map-get($themes, dark), bg-even);
+    color: map-get(map-get($themes, dark), text-f);
+  }
+
+  .site-footer, .stylethemes {
+    background-color: map-get(map-get($themes, dark), bg-f);
+    color: map-get(map-get($themes, dark), text-f);
+  }
+
+  .site-footer a {
+    color: map-get(map-get($themes, dark), brand);
+  }
+
+  .site-footer {
+    h1, h2, h3, h4, h5, h6 {
+      color: map-get(map-get($themes, dark), text-f);
+    }
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .bg-odd {
+    background-color: map-get(map-get($themes, light), bg-odd);
+    color: map-get(map-get($themes, light), text-f);
+  }
+
+  .bg-even {
+    background-color: map-get(map-get($themes, light), bg-even);
+    color: map-get(map-get($themes, light), text-f);
+  }
+
+  .site-footer, .stylethemes {
+    background-color: map-get(map-get($themes, light), bg-f);
+    color: map-get(map-get($themes, light), text-f);
+  }
+
+  .site-footer a {
+    color: map-get(map-get($themes, light), brand);
+  }
+
+  .site-footer {
+    h1, h2, h3, h4, h5, h6 {
+      color: map-get(map-get($themes, light), text-f);
+    }
+  }
+}
+
+*/

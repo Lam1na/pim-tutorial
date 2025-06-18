@@ -1,0 +1,64 @@
+<footer class="site-footer footer mt-auto py-5">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-4 mb-3">
+				<h5>{{ pimcore_input("headline1", { placeholder: "Überschrift 1", width: 300 }).render()|raw }}</h5>
+				<figure>
+					<blockquote class="blockquote">
+						<p>
+                            {{ pimcore_textarea("zitattext", {
+                                "nl2br": true,
+                                "height": 300,
+                                "placeholder": "Zitattext"
+                            }) }}
+                        </p>
+					</blockquote>
+					<figcaption class="blockquote-footer">
+						{{ pimcore_input("zitatautor", { placeholder: "Autor", width: 300 }).render()|raw }}
+						<cite title="Source Title">{{ pimcore_input("autorenbeschreibung", { placeholder: "Autorenbeschreibung", width: 300 }).render()|raw }}</cite>
+					</figcaption>
+				</figure>
+			</div>
+
+			<div class="col-md-4 mb-3">
+				<h5>{{ pimcore_input("headline2", { placeholder: "Überschrift 2", width: 300 }).render()|raw }}</h5>
+				<ul class="list-unstyled">
+					<li>
+						{{ pimcore_link("impressum", { text: "Impressum" }).render()|raw }}
+					</li>
+					<li>
+						{{ pimcore_link("datenschutz", { text: "Datenschutz", }).render()|raw }}
+					</li>
+				</ul>
+			</div>
+
+			<div class="col-md-4 mb-3">
+				<h5>{{ pimcore_input("headline3", { placeholder: "Überschrift 3", width: 300 }).render()|raw }}</h5>
+				<ul class="list-inline">
+					{% if pimcore_link("facebook") %}
+						<li class="list-inline-item">
+							{{ pimcore_link("facebook", { noText: true, class: "text-light fs-4", textPrefix: '<i class="bi bi-facebook"></i>', target: "_blank" }).render()|raw }}
+						</li>
+					{% endif %}
+					{% if pimcore_link("instagram") %}
+						<li class="list-inline-item">
+							{{ pimcore_link("instagram", { noText: true, class: "text-light fs-4", textPrefix: '<i class="bi bi-instagram"></i>', target: "_blank" }).render()|raw }}
+						</li>
+					{% endif %}
+					{% if pimcore_link("twitter") %}
+						<li class="list-inline-item">
+							{{ pimcore_link("twitter", { noText: true, class: "text-light fs-4", textPrefix: '<i class="bi bi-twitter-x"></i>', target: "_blank" }).render()|raw }}
+						</li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+		<div class="text-center border-top pt-3 mt-3">
+			<small>©
+				{{ "now"|date("Y") }}
+				<span class="footer-copyright-brand">{{ document.getProperty('company_name') ?: 'Firmenname' }}</span>
+				- Alle Rechte vorbehalten.</small>
+		</div>
+	</div>
+</footer>

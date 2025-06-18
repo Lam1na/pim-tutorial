@@ -3,17 +3,19 @@
 // Variablen und Schriftarten zuerst laden
 
 @import 'variables';
+@import 'mixins';
+@import 'css-vars';
+:root {
+  @include export-css-vars;
+}
 @import 'typography';
 
-@import 'themes';
-@import 'mixins';
 @import 'buttons';
 @import 'navigation';
 @import 'forms';
 @import 'layout';
 @import 'footer';
+@import 'themes';
 
 //Area-Bricks
 @import 'areas/hero';
-
-

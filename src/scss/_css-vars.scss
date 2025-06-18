@@ -1,0 +1,7 @@
+// src/scss/_css-vars.scss
+
+@mixin export-css-vars {
+    @each $name, $value in $css-vars {
+        --#{$name}: #{$value};
+    }
+}

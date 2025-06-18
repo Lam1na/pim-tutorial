@@ -44,6 +44,7 @@ class ContentController extends FrontendController
 
         // Render das Footer-Template mit den Daten
         return $this->render('content/footer.html.twig', $footerData);
-    }
+        
+    } 
    
 }

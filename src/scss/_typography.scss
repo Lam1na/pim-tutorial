@@ -1,13 +1,13 @@
 /* /src/scss/_typography.scss */
 
 body {
-  font-family: $font-body;
+  font-family: $font-body; // bleibt so, da schon var(--font-body)
   font-weight: $font-weight-light;
-  font-size: $font-size-base; // entspricht 16px
-   line-height: $line-height-base; // angenehm lesbar
-  letter-spacing: 0.015em; // leichtes Tracking für Offenheit
-  color: $text-color;
-  background-color: $color-white;
+  font-size: $font-size-base; // z.B. 1.1rem
+  line-height: $line-height-base;
+  letter-spacing: 0.015em;
+  color: var(--color-text-lighttheme); // statt $text-color, CSS-Variable nutzen
+  background-color: var(--color-text-lighttheme); // falls du auch dafür CSS-Variable hast
 }
 
 .wysiwyg-content {
@@ -28,23 +28,23 @@ h1, h2 {
   font-family: $font-headline;
   font-style: oblique;
   font-weight: 300;
-  color: $color-main-brand;
+  color: var(--color-main-brand); // CSS-Variable statt $color-main-brand
 }
 
 h3, h4, h5, h6 {
   font-family: $font-subline;
   font-weight: normal;
-  color: $color-main-brand;
+  color: var(--color-main-brand);
 }
 
 .subline {
   font-family: $font-subline;
   font-weight: normal;
-  color: white;
+  color: var(--color-white); // besser als hardcoded "white"
 }
 
 .nav-pagetitle::before {
-    margin-right: 0.25 rem;
-    content: ".:";
-    font-family: $font-subline;
+  margin-right: 0.25rem; // kleiner Tipp: kein Leerzeichen zwischen 0.25 und rem
+  content: ".:";
+  font-family: $font-subline;
 }
